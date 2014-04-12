@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/activity_book_create_forward"
+        android:enabled="true"
+        android:icon="@drawable/ic_action_forward"
+        android:showAsAction="always"
+        android:title="@string/activity_book_create_forward"
+        android:visible="true">
+    </item>
+
+</menu>

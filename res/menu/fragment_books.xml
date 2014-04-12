@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/fragment_books_add"
+        android:icon="@drawable/ic_action_new"
+        android:orderInCategory="1"
+        android:showAsAction="always"
+        android:title="@string/fragment_books_menu_add">
+    </item>
+    <item
+        android:id="@+id/fragment_books_view_grid"
+        android:enabled="true"
+        android:icon="@drawable/ic_action_view_as_grid"
+        android:showAsAction="always"
+        android:title="@string/fragment_books_menu_view_grid"
+        android:visible="false" android:orderInCategory="2"/>
+    <item
+        android:id="@+id/fragment_books_view_list"
+        android:enabled="true"
+        android:icon="@drawable/ic_action_view_as_list"
+        android:showAsAction="always"
+        android:title="@string/fragment_books_menu_view_list"
+        android:visible="true" android:orderInCategory="2"/>
+    <item
+        android:id="@+id/fragment_books_sort"
+        android:enabled="true"
+        android:icon="@drawable/ic_action_sort_by_size"
+        android:showAsAction="ifRoom"
+        android:title="@string/fragment_books_menu_sort"
+        android:visible="true" android:orderInCategory="3">
+        <menu>
+            <item
+                android:id="@+id/fragment_books_sort_alphabetical"
+                android:enabled="true"
+                android:title="@string/fragment_books_menu_sort_alphabetical"
+                android:visible="true"/>
+            <item
+                android:id="@+id/fragment_books_sort_date"
+                android:enabled="true"
+                android:title="@string/fragment_books_menu_sort_date"
+                android:visible="true"/>
+            <item
+                android:id="@+id/fragment_books_sort_random"
+                android:enabled="true"
+                android:title="@string/fragment_books_menu_sort_random"
+                android:visible="true"/>
+        </menu>
+    </item>
+
+</menu>

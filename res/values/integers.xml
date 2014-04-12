@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="maxPageCount">10000</integer>
+    <integer name="maxParagraphCount">20</integer>
+    <integer name="maxSentenceCount">10</integer>
+
+</resources>

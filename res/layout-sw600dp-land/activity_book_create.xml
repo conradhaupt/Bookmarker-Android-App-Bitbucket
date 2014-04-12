@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bmark_blue_light"
+    android:fitsSystemWindows="true"
+    android:orientation="horizontal" >
+
+    <fragment
+        android:id="@+id/fragment_container"
+        android:name="com.conradhaupt.bookmarker.BookPositionFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <View
+        android:layout_width="@dimen/activity_book_create_divider"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <fragment
+        android:id="@+id/fragment_position"
+        android:name="com.conradhaupt.bookmarker.BookPositionFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+</LinearLayout>

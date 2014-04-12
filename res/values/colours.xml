@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="bmark_blue_light">#4485d3</color>
+    <color name="bmark_blue_normal">#2869b6</color>
+    <color name="bmark_blue_dark">#11519f</color>
+    <color name="bmark_red_dark">#9f1d11</color>
+    <color name="bmark_red_normal">#b63428</color>
+    <color name="bmark_red_light">#d35145</color>
+
+</resources>

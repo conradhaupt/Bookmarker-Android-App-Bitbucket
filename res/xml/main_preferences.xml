@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:key="main_settings" android:title="Settings">
+    <PreferenceScreen android:key="main_screen_general" android:title="General">
+        
+    </PreferenceScreen><PreferenceScreen android:key="main_screen_lookandfeel" android:title="Look and Feel"></PreferenceScreen>
+    
+
+</PreferenceScreen>

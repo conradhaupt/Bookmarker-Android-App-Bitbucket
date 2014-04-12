@@ -1,0 +1,21 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppBaseTheme" parent="android:Theme.Light"></style>
+
+    <style name="AppTheme" parent="AppBaseTheme">
+        <item name="android:actionBarStyle">@style/BMark_ActionBar</item>
+    </style>
+
+    <style name="AppTheme.Dialog" parent="@android:style/Theme.Holo.Light.Dialog.NoActionBar.MinWidth">
+        <item name="android:actionBarStyle">@style/BMark_ActionBar</item>        
+    </style>
+
+    <style name="BMark_ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/bmark_blue_light</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+    <style name="BMark_textAppearanceLarge" parent="@android:style/TextAppearance.Holo.Large.Inverse">        
+    </style>
+
+</resources>

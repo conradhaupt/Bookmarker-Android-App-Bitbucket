@@ -1,0 +1,30 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bmark_blue_light"
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity" >
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/activity_drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/background_light" >
+
+        <FrameLayout
+            android:id="@+id/activity_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </FrameLayout>
+
+        <ListView
+            android:id="@+id/activity_drawer_listview"
+            android:layout_width="@dimen/activity_drawer_width"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:background="@android:color/background_light" >
+        </ListView>
+    </android.support.v4.widget.DrawerLayout>
+
+</RelativeLayout>

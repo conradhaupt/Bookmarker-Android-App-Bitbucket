@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_book_create_padding"
+        android:background="@drawable/card_background"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/fragment_book_position_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fragment_book_title_height"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:background="@color/bmark_blue_light"
+            android:gravity="center"
+            android:text="@string/fragment_book_position_title"
+            android:textAppearance="@style/BMark_textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/fragment_book_position_book_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:gravity="center"
+            android:maxLines="1"
+            android:scrollHorizontally="true"
+            android:text="DEFAULT_TITLE"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/fragment_book_position_book_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:gravity="center"
+            android:maxLines="1"
+            android:scrollHorizontally="true"
+            android:text="DEFAULT_AUTHOR"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:background="@android:color/darker_gray" >
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <NumberPicker
+                    android:id="@+id/fragment_book_position_picker_page"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_below="@+id/fragment_book_position_textview_page"
+                    android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:id="@+id/fragment_book_position_textview_page"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="@string/fragment_book_position_page_title"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <NumberPicker
+                    android:id="@+id/fragment_book_position_picker_paragraph"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_below="@+id/fragment_book_position_textview_paragraph"
+                    android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:id="@+id/fragment_book_position_textview_paragraph"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="@string/fragment_book_position_paragraph_title"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <NumberPicker
+                    android:id="@+id/fragment_book_position_picker_sentence"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_below="@+id/fragment_book_position_textview_sentence"
+                    android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:id="@+id/fragment_book_position_textview_sentence"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="@string/fragment_book_position_sentence_title"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
