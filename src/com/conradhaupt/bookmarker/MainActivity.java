@@ -31,57 +31,11 @@ public class MainActivity extends FragmentActivity implements
 
 	// Value Variables
 	private String[] mDrawerTitles;
+	public String currentTitle = "";
 
 	// Fragment Variables
 	private SettingsFragment fSettingsFragment;
 	private BooksFragment fBooksFragment;
-
-	private void initViewVariables() {// Assign variables
-		mDrawerLayout = (DrawerLayout) this.findViewById(R.id.activity_drawer);
-		mDrawer = (ListView) this.findViewById(R.id.activity_drawer_listview);
-		mFrameLayout = (FrameLayout) this.findViewById(R.id.activity_frame);
-		mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-				R.drawable.ic_navigation_drawer,
-				R.string.activity_main_title_drawer_open,
-				R.string.activity_main_title_drawer_closed) {
-			@Override
-			public void onDrawerClosed(View drawerView) {
-				super.onDrawerClosed(drawerView);
-				if (getFragmentManager().getBackStackEntryCount() <= 1) {
-					getActionBar()
-							.setTitle(
-									getResources()
-											.getString(
-													R.string.activity_main_title_drawer_closed));
-				} else {
-					getActionBar()
-							.setTitle(
-									getResources()
-											.getString(
-													R.string.fragment_settings_title_drawer_closed));
-				}
-				invalidateOptionsMenu();
-			}
-
-			@Override
-			public void onDrawerOpened(View drawerView) {
-				super.onDrawerOpened(drawerView);
-				getActionBar().setTitle(
-						getResources().getString(
-								R.string.activity_main_title_drawer_open));
-				invalidateOptionsMenu();
-			}
-		};
-		mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
-	}
-
-	private void initDrawerAdapter() {
-		this.mDrawerTitles = getResources().getStringArray(R.array.menu);
-		mDrawerAdapter = new NavDrawerAdapter<String>(this,
-				R.layout.simple_list_item_1, this.mDrawerTitles);
-		mDrawer.setAdapter(mDrawerAdapter);
-		mDrawer.setOnItemClickListener(this);
-	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -111,14 +65,32 @@ public class MainActivity extends FragmentActivity implements
 	}
 
 	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
-		super.onConfigurationChanged(newConfig);
-		mActionBarDrawerToggle.onConfigurationChanged(newConfig);
+	protected void onSaveInstanceState(Bundle outState) {
+
+		try {
+			outState.putBoolean(
+					"settingsFragment",
+					this.getFragmentManager()
+							.getBackStackEntryAt(
+									this.getFragmentManager()
+											.getBackStackEntryCount() - 1)
+							.getName().equals("fSettingsFragment") ? true
+							: false);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		super.onSaveInstanceState(outState);
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
+	}
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		mActionBarDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
 	@Override
@@ -135,6 +107,19 @@ public class MainActivity extends FragmentActivity implements
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onBackPressed() {
+		try {
+			if (this.getFragmentManager().getBackStackEntryCount() > 1) {
+				this.getFragmentManager().popBackStack();
+				return;
+			}
+		} catch (Exception e) {
+
+		}
+		super.onBackPressed();
 	}
 
 	@Override
@@ -160,21 +145,47 @@ public class MainActivity extends FragmentActivity implements
 
 	}
 
-	@Override
-	public void onBackPressed() {
-		try {
-			if (this.getFragmentManager().getBackStackEntryCount() > 1) {
-				this.getFragmentManager().popBackStack();
-				return;
-			}
-		} catch (Exception e) {
+	private void initViewVariables() {// Assign variables
+		mDrawerLayout = (DrawerLayout) this.findViewById(R.id.activity_drawer);
+		mDrawer = (ListView) this.findViewById(R.id.activity_drawer_listview);
+		mFrameLayout = (FrameLayout) this.findViewById(R.id.activity_frame);
+		mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+				R.drawable.ic_navigation_drawer,
+				R.string.activity_main_title_drawer_open,
+				R.string.fragment_main_title_drawer_closed) {
+			@Override
+			public void onDrawerClosed(View drawerView) {
+				super.onDrawerClosed(drawerView);
+				// Assign the new title to the actionBar
+				getActionBar().setTitle(currentTitle);
 
-		}
-		super.onBackPressed();
+				invalidateOptionsMenu();
+			}
+
+			@Override
+			public void onDrawerOpened(View drawerView) {
+				super.onDrawerOpened(drawerView);
+				// Store the current actionBar title if necessary
+				if (!currentTitle.equals(getActionBar().getTitle())) {
+					currentTitle = getActionBar().getTitle().toString();
+				}
+
+				// Change the actionBar title
+				getActionBar().setTitle(
+						getResources().getString(
+								R.string.activity_main_title_drawer_open));
+				invalidateOptionsMenu();
+			}
+		};
+		mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
 	}
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	private void initDrawerAdapter() {
+		this.mDrawerTitles = getResources().getStringArray(R.array.menu);
+		mDrawerAdapter = new NavDrawerAdapter<String>(this,
+				R.layout.simple_list_item_1, this.mDrawerTitles);
+		mDrawer.setAdapter(mDrawerAdapter);
+		mDrawer.setOnItemClickListener(this);
 	}
 
 	private void openSettingsFragment() {
@@ -223,24 +234,6 @@ public class MainActivity extends FragmentActivity implements
 			System.out
 					.println("Current fragment is BooksFragment, leaving as is");
 		}
-	}
-
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-
-		try {
-			outState.putBoolean(
-					"settingsFragment",
-					this.getFragmentManager()
-							.getBackStackEntryAt(
-									this.getFragmentManager()
-											.getBackStackEntryCount() - 1)
-							.getName().equals("fSettingsFragment") ? true
-							: false);
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		super.onSaveInstanceState(outState);
 	}
 
 }

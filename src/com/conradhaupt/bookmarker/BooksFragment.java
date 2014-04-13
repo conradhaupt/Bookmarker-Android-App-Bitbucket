@@ -1,8 +1,6 @@
 package com.conradhaupt.bookmarker;
 
-import android.app.Activity;
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,32 +9,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
- * contain this fragment must implement the
- * {@link BooksFragment.OnFragmentInteractionListener} interface to handle
- * interaction events. Use the {@link BooksFragment#newInstance} factory method
- * to create an instance of this fragment.
- * 
- */
 public class BooksFragment extends Fragment {
 
 	private Menu menu;
 	private int viewType = 0;// 0 = List, 1 = Grid
 
-	/**
-	 * Use this factory method to create a new instance of this fragment using
-	 * the provided parameters.
-	 * 
-	 * @return A new instance of fragment BooksFragment.
-	 */
 	public static BooksFragment newInstance() {
 		BooksFragment fragment = new BooksFragment();
-		// Bundle args = new Bundle();
-		// args.putString(ARG_PARAM1, param1);
-		// args.putString(ARG_PARAM2, param2);
-		// fragment.setArguments(args);
-
 		return fragment;
 	}
 
@@ -104,43 +83,22 @@ public class BooksFragment extends Fragment {
 
 	@Override
 	public void onResume() {
+		// Set actionBar title
 		this.getActivity().getActionBar()
-				.setTitle(R.string.activity_main_title_drawer_closed);
+				.setTitle(R.string.fragment_main_title_drawer_closed);
 		this.getActivity().invalidateOptionsMenu();
 		super.onResume();
-	}
+	};
 
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-	}
-
-	@Override
-	public void onDetach() {
-		super.onDetach();
-	}
-
-	/**
-	 * This interface must be implemented by activities that contain this
-	 * fragment to allow an interaction in this fragment to be communicated to
-	 * the activity and potentially other fragments contained in that activity.
-	 * <p>
-	 * See the Android Training lesson <a href=
-	 * "http://developer.android.com/training/basics/fragments/communicating.html"
-	 * >Communicating with Other Fragments</a> for more information.
-	 */
 	private void onAddBook() {
 		System.out.println("Add book pressed");
-		startActivity(new Intent(this.getActivity(), BookCreateActivity.class)
-				.putExtra(BookCreateActivity.MODE_IN_APP, true));
+		// TODO add code to add a book
 	}
 
 	private void onViewList() {
 		this.viewType = 1;
 		System.out.println("View List pressed");
 		onUpdateViewType();
-		new BookPositionFragment().show(this.getFragmentManager(),
-				"bookPositionDialog");
 	}
 
 	private void onViewGrid() {
@@ -151,24 +109,30 @@ public class BooksFragment extends Fragment {
 
 	private void onSortAlphabetical() {
 		System.out.println("Sort Alphabetically pressed");
-
+		// TODO add code to sort books alphabetically
 	}
 
 	private void onSortDate() {
 		System.out.println("Sort Date pressed");
+		// TODO add code to sort books by date
 	}
 
 	private void onSortRandom() {
 		System.out.println("Sort Random pressed");
+		// Add code to sort books randomly
 	}
 
 	private void onUpdateViewType() {
 		System.out.println("OnUpdateViewType run with viewtype value of "
 				+ this.viewType);
+
+		// Modify menu item icon depending on state
 		menu.findItem(R.id.fragment_books_view_list).setVisible(
 				this.viewType == 0 ? true : false);
 		menu.findItem(R.id.fragment_books_view_grid).setVisible(
 				this.viewType == 0 ? false : true);
+
+		// TODO add in code to change display of books
 	}
 
 }

@@ -3,14 +3,18 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Global Dimensions -->
     <dimen name="activity_drawer_width">256dp</dimen>
     <dimen name="activity_drawer_item_padding_left">16dp</dimen>
-    <dimen name="activity_book_create_divider">2dp</dimen>
-    <dimen name="activity_book_create_padding">16dp</dimen>
-    <dimen name="activity_book_create_padding_join">16dp</dimen>
 
-    <!-- Drawable dimensions -->
+    <!-- Specific Dimensions -->
+
+
+    <!-- Specific Drawable Dimensions -->
     <dimen name="fragment_book_title_height">48dp</dimen>
     <dimen name="fragment_book_item_height">48dp</dimen>
+
+    <!-- Global Drawable Dimensions -->
 
 </resources>

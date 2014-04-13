@@ -27,8 +27,7 @@
         </activity>
         <activity
             android:name="com.conradhaupt.bookmarker.BookCreateActivity"
-            android:label="@string/title_activity_book_create"
-            android:windowSoftInputMode="adjustResize" >
+            android:label="@string/activity_book_create_title" >
         </activity>
     </application>
 

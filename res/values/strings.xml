@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Global Values -->
     <string name="app_name">Bookmarker</string>
-    <string name="title_activity_book_create">Create a Book</string>
-    <string name="activity_main_title_drawer_closed">Books</string>
+
+    <!-- Activity Titles -->
+    <string name="fragment_main_title_drawer_closed">Books</string>
     <string name="activity_main_title_drawer_open">Menu</string>
     <string name="fragment_settings_title_drawer_closed">Settings</string>
+    <string name="activity_book_create_title">Add a book</string>
+
+    <!-- Specific Values -->
     <string name="fragment_books_menu_add">Add</string>
     <string name="fragment_books_menu_view_grid">View as grid</string>
     <string name="fragment_books_menu_view_list">View as list</string>
@@ -13,26 +18,5 @@
     <string name="fragment_books_menu_sort_alphabetical">Alphabetical</string>
     <string name="fragment_books_menu_sort_date">Date</string>
     <string name="fragment_books_menu_sort_random">Random</string>
-    <string name="book_info_title">Book Title</string>
-    <string name="book_info_page_count">pages</string>
-    <string name="book_info_chapter_count">chapters</string>
-    <string name="position_info_sentence">sentence</string>
-    <string name="position_info_paragraph">paragraph</string>
-    <string name="position_info_page">page</string>
-    <string name="activity_book_create_submit">Submit</string>
-    <string name="activity_book_create_save">Save</string>
-    <string name="activity_book_create_cancel">Cancel</string>
-    <string name="activity_book_create_forward">Forward</string>
-    <string name="fragment_book_information_title">Information</string>
-    <string name="fragment_book_position_title">Position</string>
-    <string name="fragment_book_information_title_hint">Book Title</string>
-    <string name="fragment_book_information_isbn_hint">ISBN Number</string>
-    <string name="fragment_book_information_isbn_author">Author</string>
-    <string name="fragment_book_information_isbn_pagecount">Page Count</string>
-    <string name="fragment_book_information_page_title">page</string>
-    <string name="fragment_book_information_page_title_2">pages</string>
-    <string name="fragment_book_position_page_title">Page</string>
-    <string name="fragment_book_position_paragraph_title">Paragraph</string>
-    <string name="fragment_book_position_sentence_title">Sentence</string>
 
 </resources>
