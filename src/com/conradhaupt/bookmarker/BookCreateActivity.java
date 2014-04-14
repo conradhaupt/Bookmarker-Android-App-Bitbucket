@@ -1,10 +1,13 @@
 package com.conradhaupt.bookmarker;
 
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceScreen;
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.view.Menu;
 
-public class BookCreateActivity extends Activity {
+public class BookCreateActivity extends PreferenceActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
