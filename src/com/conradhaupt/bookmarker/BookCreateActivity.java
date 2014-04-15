@@ -1,13 +1,14 @@
 package com.conradhaupt.bookmarker;
 
-import android.os.Bundle;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceScreen;
 import android.app.Activity;
-import android.content.SharedPreferences;
+import android.content.Context;
+import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
-public class BookCreateActivity extends PreferenceActivity {
+public class BookCreateActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,4 +23,33 @@ public class BookCreateActivity extends PreferenceActivity {
 		return true;
 	}
 
+	/* Classes */
+	public class BookProperty {
+		/* Variables */
+		private int type = 0;
+		private Object value;
+		private String name = "";
+
+		// Static Variables
+		public static final int TYPE_SECTION = -2;
+		public static final int TYPE_HEADING = -1;
+		public static final int TYPE_VALUE = 0;
+
+		public BookProperty() {
+		}
+	}
+
+	public class BookCreateAdapter extends ArrayAdapter<BookProperty> {
+
+		public BookCreateAdapter(Context context, int resource,
+				int textViewResourceId, BookProperty[] objects) {
+			super(context, resource, textViewResourceId, objects);
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			return super.getView(position, convertView, parent);
+		}
+
+	}
 }
