@@ -3,17 +3,21 @@ package com.conradhaupt.bookmarker;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
-public class BookCreateActivity extends Activity {
+public class BookCreateActivity extends PreferenceActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_book_create);
+		addPreferencesFromResource(R.xml.book_preferences);
 	}
 
 	@Override
@@ -41,15 +45,33 @@ public class BookCreateActivity extends Activity {
 
 	public class BookCreateAdapter extends ArrayAdapter<BookProperty> {
 
+		/* Variables */
+		public BookProperty[] listElements;
+
 		public BookCreateAdapter(Context context, int resource,
 				int textViewResourceId, BookProperty[] objects) {
 			super(context, resource, textViewResourceId, objects);
+			listElements = objects;
+		}
+
+		@Override
+		public int getViewTypeCount() {
+			return 3;
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
+			// Check if the view needs to be instantiated
+			if (convertView == null) {
+
+			}
 			return super.getView(position, convertView, parent);
 		}
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+		// TODO Auto-generated method stub
 
 	}
 }
