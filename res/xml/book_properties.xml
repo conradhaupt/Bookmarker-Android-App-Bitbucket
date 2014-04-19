@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:key="preference_book">
+    <PreferenceCategory android:key="book_information" android:title="@string/book_preference_information">
+        <EditTextPreference android:key="book_information_title" android:title="@string/book_preference_information_title"/>
+        <EditTextPreference android:key="book_information_author" android:title="@string/book_preference_information_author"/>
+        <EditTextPreference android:key="book_information_isbn" android:title="@string/book_preference_information_isbn"/>
+    </PreferenceCategory>
+    
+
+</PreferenceScreen>

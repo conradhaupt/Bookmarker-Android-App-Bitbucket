@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <item name="android:actionBarStyle">@style/ActionBar</item>
+    </style>
+
+    <style name="AppTheme" parent="AppBaseTheme">
+
+        <!-- Styles -->
+        <item name="android:actionBarStyle">@style/ActionBar</item>
+        <item name="selection_highlight_background">@drawable/selection_hightlight_background_blue</item>
+        <item name="android:actionBarItemBackground">@drawable/selection_hightlight_background_blue</item>
+        <item name="android:selectableItemBackground">@drawable/selection_hightlight_background_blue_light</item>
+        <item name="android:actionButtonStyle">@style/ActionBar.ActionButton</item>
+        <!-- Drawables -->
+        <item name="ic_accept">@drawable/ic_accept_holo_dark</item>
+        <item name="ic_bad">@drawable/ic_bad_holo_dark</item>
+        <item name="ic_good">@drawable/ic_good_holo_dark</item>
+        <item name="ic_cancel">@drawable/ic_cancel_holo_dark</item>
+        <item name="ic_collection">@drawable/ic_collection_holo_dark</item>
+        <item name="ic_copy">@drawable/ic_copy_holo_dark</item>
+        <item name="ic_cut">@drawable/ic_cut_holo_dark</item>
+        <item name="ic_discard">@drawable/ic_discard_holo_dark</item>
+        <item name="ic_edit">@drawable/ic_edit_holo_dark</item>
+        <item name="ic_labels">@drawable/ic_labels_holo_dark</item>
+        <item name="ic_logo">@drawable/ic_logo_holo_dark</item>
+        <item name="ic_more">@drawable/ic_more_holo_dark</item>
+        <item name="ic_navigation">@drawable/ic_navigation_holo_dark</item>
+        <item name="ic_new">@drawable/ic_new_holo_dark</item>
+        <item name="ic_new_label">@drawable/ic_new_label_holo_dark</item>
+        <item name="ic_paste">@drawable/ic_paste_holo_dark</item>
+        <item name="ic_save">@drawable/ic_save_holo_dark</item>
+        <item name="ic_search">@drawable/ic_search_holo_dark</item>
+        <item name="ic_select_all">@drawable/ic_select_all_holo_dark</item>
+        <item name="ic_settings">@drawable/ic_settings_holo_dark</item>
+        <item name="ic_share">@drawable/ic_share_holo_dark</item>
+        <item name="ic_sort_by_size">@drawable/ic_sort_by_size_holo_dark</item>
+        <item name="ic_undo">@drawable/ic_undo_holo_dark</item>
+        <item name="ic_view_as_grid">@drawable/ic_view_as_grid_holo_dark</item>
+        <item name="ic_view_as_list">@drawable/ic_view_as_list_holo_dark</item>
+        <item name="ic_warning">@drawable/ic_warning_holo_dark</item>
+        <item name="ic_web_site">@drawable/ic_web_site_holo_dark</item>
+    </style>
+
+    <style name="AppTheme.Blue">
+
+        <!-- Styles -->
+        <item name="android:actionBarStyle">@style/ActionBar.Blue</item>
+        <item name="selection_highlight_background">@drawable/selection_hightlight_background_blue</item>
+        <item name="android:actionBarItemBackground">@drawable/selection_hightlight_background_blue</item>
+        <item name="android:selectableItemBackground">@drawable/selection_hightlight_background_blue_light</item>
+
+        <!-- Drawables -->
+        <item name="ic_accept">@drawable/ic_accept_holo_dark</item>
+        <item name="ic_bad">@drawable/ic_bad_holo_dark</item>
+        <item name="ic_good">@drawable/ic_good_holo_dark</item>
+        <item name="ic_cancel">@drawable/ic_cancel_holo_dark</item>
+        <item name="ic_collection">@drawable/ic_collection_holo_dark</item>
+        <item name="ic_copy">@drawable/ic_copy_holo_dark</item>
+        <item name="ic_cut">@drawable/ic_cut_holo_dark</item>
+        <item name="ic_discard">@drawable/ic_discard_holo_dark</item>
+        <item name="ic_edit">@drawable/ic_edit_holo_dark</item>
+        <item name="ic_labels">@drawable/ic_labels_holo_dark</item>
+        <item name="ic_logo">@drawable/ic_logo_holo_dark</item>
+        <item name="ic_more">@drawable/ic_more_holo_dark</item>
+        <item name="ic_navigation">@drawable/ic_navigation_holo_dark</item>
+        <item name="ic_new">@drawable/ic_new_holo_dark</item>
+        <item name="ic_new_label">@drawable/ic_new_label_holo_dark</item>
+        <item name="ic_paste">@drawable/ic_paste_holo_dark</item>
+        <item name="ic_save">@drawable/ic_save_holo_dark</item>
+        <item name="ic_search">@drawable/ic_search_holo_dark</item>
+        <item name="ic_select_all">@drawable/ic_select_all_holo_dark</item>
+        <item name="ic_settings">@drawable/ic_settings_holo_dark</item>
+        <item name="ic_share">@drawable/ic_share_holo_dark</item>
+        <item name="ic_sort_by_size">@drawable/ic_sort_by_size_holo_dark</item>
+        <item name="ic_undo">@drawable/ic_undo_holo_dark</item>
+        <item name="ic_view_as_grid">@drawable/ic_view_as_grid_holo_dark</item>
+        <item name="ic_view_as_list">@drawable/ic_view_as_list_holo_dark</item>
+        <item name="ic_warning">@drawable/ic_warning_holo_dark</item>
+        <item name="ic_web_site">@drawable/ic_web_site_holo_dark</item>
+    </style>
+
+    <style name="AppTheme.Red">
+
+        <!-- Styles -->
+        <item name="android:actionBarStyle">@style/ActionBar.Red</item>
+        <item name="selection_highlight_background">@drawable/selection_hightlight_background_red</item>
+        <item name="android:actionBarItemBackground">@drawable/selection_hightlight_background_red</item>
+        <item name="android:selectableItemBackground">@drawable/selection_hightlight_background_red_light</item>
+
+        <!-- Drawables -->
+        <item name="ic_accept">@drawable/ic_accept_holo_dark</item>
+        <item name="ic_bad">@drawable/ic_bad_holo_dark</item>
+        <item name="ic_good">@drawable/ic_good_holo_dark</item>
+        <item name="ic_cancel">@drawable/ic_cancel_holo_dark</item>
+        <item name="ic_collection">@drawable/ic_collection_holo_dark</item>
+        <item name="ic_copy">@drawable/ic_copy_holo_dark</item>
+        <item name="ic_cut">@drawable/ic_cut_holo_dark</item>
+        <item name="ic_discard">@drawable/ic_discard_holo_dark</item>
+        <item name="ic_edit">@drawable/ic_edit_holo_dark</item>
+        <item name="ic_labels">@drawable/ic_labels_holo_dark</item>
+        <item name="ic_logo">@drawable/ic_logo_holo_dark</item>
+        <item name="ic_more">@drawable/ic_more_holo_dark</item>
+        <item name="ic_navigation">@drawable/ic_navigation_holo_dark</item>
+        <item name="ic_new">@drawable/ic_new_holo_dark</item>
+        <item name="ic_new_label">@drawable/ic_new_label_holo_dark</item>
+        <item name="ic_paste">@drawable/ic_paste_holo_dark</item>
+        <item name="ic_save">@drawable/ic_save_holo_dark</item>
+        <item name="ic_search">@drawable/ic_search_holo_dark</item>
+        <item name="ic_select_all">@drawable/ic_select_all_holo_dark</item>
+        <item name="ic_settings">@drawable/ic_settings_holo_dark</item>
+        <item name="ic_share">@drawable/ic_share_holo_dark</item>
+        <item name="ic_sort_by_size">@drawable/ic_sort_by_size_holo_dark</item>
+        <item name="ic_undo">@drawable/ic_undo_holo_dark</item>
+        <item name="ic_view_as_grid">@drawable/ic_view_as_grid_holo_dark</item>
+        <item name="ic_view_as_list">@drawable/ic_view_as_list_holo_dark</item>
+        <item name="ic_warning">@drawable/ic_warning_holo_dark</item>
+        <item name="ic_web_site">@drawable/ic_web_site_holo_dark</item>
+    </style>
+
+    <style name="AppTheme.Green">
+
+        <!-- Styles -->
+        <item name="android:actionBarStyle">@style/ActionBar.Green</item>
+        <item name="selection_highlight_background">@drawable/selection_hightlight_background_green</item>
+        <item name="android:actionBarItemBackground">@drawable/selection_hightlight_background_green</item>
+        <item name="android:selectableItemBackground">@drawable/selection_hightlight_background_green_light</item>
+
+        <!-- Drawables -->
+        <item name="ic_accept">@drawable/ic_accept_holo_dark</item>
+        <item name="ic_bad">@drawable/ic_bad_holo_dark</item>
+        <item name="ic_good">@drawable/ic_good_holo_dark</item>
+        <item name="ic_cancel">@drawable/ic_cancel_holo_dark</item>
+        <item name="ic_collection">@drawable/ic_collection_holo_dark</item>
+        <item name="ic_copy">@drawable/ic_copy_holo_dark</item>
+        <item name="ic_cut">@drawable/ic_cut_holo_dark</item>
+        <item name="ic_discard">@drawable/ic_discard_holo_dark</item>
+        <item name="ic_edit">@drawable/ic_edit_holo_dark</item>
+        <item name="ic_labels">@drawable/ic_labels_holo_dark</item>
+        <item name="ic_logo">@drawable/ic_logo_holo_dark</item>
+        <item name="ic_more">@drawable/ic_more_holo_dark</item>
+        <item name="ic_navigation">@drawable/ic_navigation_holo_dark</item>
+        <item name="ic_new">@drawable/ic_new_holo_dark</item>
+        <item name="ic_new_label">@drawable/ic_new_label_holo_dark</item>
+        <item name="ic_paste">@drawable/ic_paste_holo_dark</item>
+        <item name="ic_save">@drawable/ic_save_holo_dark</item>
+        <item name="ic_search">@drawable/ic_search_holo_dark</item>
+        <item name="ic_select_all">@drawable/ic_select_all_holo_dark</item>
+        <item name="ic_settings">@drawable/ic_settings_holo_dark</item>
+        <item name="ic_share">@drawable/ic_share_holo_dark</item>
+        <item name="ic_sort_by_size">@drawable/ic_sort_by_size_holo_dark</item>
+        <item name="ic_undo">@drawable/ic_undo_holo_dark</item>
+        <item name="ic_view_as_grid">@drawable/ic_view_as_grid_holo_dark</item>
+        <item name="ic_view_as_list">@drawable/ic_view_as_list_holo_dark</item>
+        <item name="ic_warning">@drawable/ic_warning_holo_dark</item>
+        <item name="ic_web_site">@drawable/ic_web_site_holo_dark</item>
+    </style>
+
+    <style name="AppTheme.Blue.Inverse">
+
+        <!-- Styles -->
+        <item name="android:actionBarStyle">@style/ActionBar.Blue.Inverse</item>
+        <item name="selection_highlight_background">@drawable/selection_hightlight_background_blue</item>
+        <item name="android:actionBarItemBackground">@drawable/selection_hightlight_background_blue</item>
+        <item name="android:selectableItemBackground">@drawable/selection_hightlight_background_blue_light</item>
+
+        <!-- Drawables -->
+        <item name="ic_accept">@drawable/ic_accept_bmark_blue</item>
+        <item name="ic_bad">@drawable/ic_bad_bmark_blue</item>
+        <item name="ic_good">@drawable/ic_good_bmark_blue</item>
+        <item name="ic_cancel">@drawable/ic_cancel_bmark_blue</item>
+        <item name="ic_collection">@drawable/ic_collection_bmark_blue</item>
+        <item name="ic_copy">@drawable/ic_copy_bmark_blue</item>
+        <item name="ic_cut">@drawable/ic_cut_bmark_blue</item>
+        <item name="ic_discard">@drawable/ic_discard_bmark_blue</item>
+        <item name="ic_edit">@drawable/ic_edit_bmark_blue</item>
+        <item name="ic_labels">@drawable/ic_labels_bmark_blue</item>
+        <item name="ic_logo">@drawable/ic_logo_bmark_blue</item>
+        <item name="ic_more">@drawable/ic_more_bmark_blue</item>
+        <item name="ic_navigation">@drawable/ic_navigation_bmark_blue</item>
+        <item name="ic_new">@drawable/ic_new_bmark_blue</item>
+        <item name="ic_new_label">@drawable/ic_new_label_bmark_blue</item>
+        <item name="ic_paste">@drawable/ic_paste_bmark_blue</item>
+        <item name="ic_save">@drawable/ic_save_bmark_blue</item>
+        <item name="ic_search">@drawable/ic_search_bmark_blue</item>
+        <item name="ic_select_all">@drawable/ic_select_all_bmark_blue</item>
+        <item name="ic_settings">@drawable/ic_settings_bmark_blue</item>
+        <item name="ic_share">@drawable/ic_share_bmark_blue</item>
+        <item name="ic_sort_by_size">@drawable/ic_sort_by_size_bmark_blue</item>
+        <item name="ic_undo">@drawable/ic_undo_bmark_blue</item>
+        <item name="ic_view_as_grid">@drawable/ic_view_as_grid_bmark_blue</item>
+        <item name="ic_view_as_list">@drawable/ic_view_as_list_bmark_blue</item>
+        <item name="ic_warning">@drawable/ic_warning_bmark_blue</item>
+        <item name="ic_web_site">@drawable/ic_web_site_bmark_blue</item>
+    </style>
+
+    <style name="AppTheme.Red.Inverse">
+
+        <!-- Styles -->
+        <item name="android:actionBarStyle">@style/ActionBar.Red.Inverse</item>
+        <item name="selection_highlight_background">@drawable/selection_hightlight_background_red</item>
+        <item name="android:actionBarItemBackground">@drawable/selection_hightlight_background_red</item>
+        <item name="android:selectableItemBackground">@drawable/selection_hightlight_background_red_light</item>
+
+        <!-- Drawables -->
+        <item name="ic_accept">@drawable/ic_accept_bmark_red</item>
+        <item name="ic_bad">@drawable/ic_bad_bmark_red</item>
+        <item name="ic_good">@drawable/ic_good_bmark_red</item>
+        <item name="ic_cancel">@drawable/ic_cancel_bmark_red</item>
+        <item name="ic_collection">@drawable/ic_collection_bmark_red</item>
+        <item name="ic_copy">@drawable/ic_copy_bmark_red</item>
+        <item name="ic_cut">@drawable/ic_cut_bmark_red</item>
+        <item name="ic_discard">@drawable/ic_discard_bmark_red</item>
+        <item name="ic_edit">@drawable/ic_edit_bmark_red</item>
+        <item name="ic_labels">@drawable/ic_labels_bmark_red</item>
+        <item name="ic_logo">@drawable/ic_logo_bmark_red</item>
+        <item name="ic_more">@drawable/ic_more_bmark_red</item>
+        <item name="ic_navigation">@drawable/ic_navigation_bmark_red</item>
+        <item name="ic_new">@drawable/ic_new_bmark_red</item>
+        <item name="ic_new_label">@drawable/ic_new_label_bmark_red</item>
+        <item name="ic_paste">@drawable/ic_paste_bmark_red</item>
+        <item name="ic_save">@drawable/ic_save_bmark_red</item>
+        <item name="ic_search">@drawable/ic_search_bmark_red</item>
+        <item name="ic_select_all">@drawable/ic_select_all_bmark_red</item>
+        <item name="ic_settings">@drawable/ic_settings_bmark_red</item>
+        <item name="ic_share">@drawable/ic_share_bmark_red</item>
+        <item name="ic_sort_by_size">@drawable/ic_sort_by_size_bmark_red</item>
+        <item name="ic_undo">@drawable/ic_undo_bmark_red</item>
+        <item name="ic_view_as_grid">@drawable/ic_view_as_grid_bmark_red</item>
+        <item name="ic_view_as_list">@drawable/ic_view_as_list_bmark_red</item>
+        <item name="ic_warning">@drawable/ic_warning_bmark_red</item>
+        <item name="ic_web_site">@drawable/ic_web_site_bmark_red</item>
+    </style>
+
+    <style name="AppTheme.Green.Inverse">
+
+        <!-- Styles -->
+        <item name="android:actionBarStyle">@style/ActionBar.Green.Inverse</item>
+        <item name="selection_highlight_background">@drawable/selection_hightlight_background_green</item>
+        <item name="android:actionBarItemBackground">@drawable/selection_hightlight_background_green</item>
+        <item name="android:selectableItemBackground">@drawable/selection_hightlight_background_green_light</item>
+
+        <!-- Drawables -->
+        <item name="ic_accept">@drawable/ic_accept_bmark_green</item>
+        <item name="ic_bad">@drawable/ic_bad_bmark_green</item>
+        <item name="ic_good">@drawable/ic_good_bmark_green</item>
+        <item name="ic_cancel">@drawable/ic_cancel_bmark_green</item>
+        <item name="ic_collection">@drawable/ic_collection_bmark_green</item>
+        <item name="ic_copy">@drawable/ic_copy_bmark_green</item>
+        <item name="ic_cut">@drawable/ic_cut_bmark_green</item>
+        <item name="ic_discard">@drawable/ic_discard_bmark_green</item>
+        <item name="ic_edit">@drawable/ic_edit_bmark_green</item>
+        <item name="ic_labels">@drawable/ic_labels_bmark_green</item>
+        <item name="ic_logo">@drawable/ic_logo_bmark_green</item>
+        <item name="ic_more">@drawable/ic_more_bmark_green</item>
+        <item name="ic_navigation">@drawable/ic_navigation_bmark_green</item>
+        <item name="ic_new">@drawable/ic_new_bmark_green</item>
+        <item name="ic_new_label">@drawable/ic_new_label_bmark_green</item>
+        <item name="ic_paste">@drawable/ic_paste_bmark_green</item>
+        <item name="ic_save">@drawable/ic_save_bmark_green</item>
+        <item name="ic_search">@drawable/ic_search_bmark_green</item>
+        <item name="ic_select_all">@drawable/ic_select_all_bmark_green</item>
+        <item name="ic_settings">@drawable/ic_settings_bmark_green</item>
+        <item name="ic_share">@drawable/ic_share_bmark_green</item>
+        <item name="ic_sort_by_size">@drawable/ic_sort_by_size_bmark_green</item>
+        <item name="ic_undo">@drawable/ic_undo_bmark_green</item>
+        <item name="ic_view_as_grid">@drawable/ic_view_as_grid_bmark_green</item>
+        <item name="ic_view_as_list">@drawable/ic_view_as_list_bmark_green</item>
+        <item name="ic_warning">@drawable/ic_warning_bmark_green</item>
+        <item name="ic_web_site">@drawable/ic_web_site_bmark_green</item>
+    </style>
+
+</resources>
