@@ -1,8 +1,9 @@
 package com.conradhaupt.bookmarker;
 
-import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
@@ -32,6 +33,7 @@ public class MainActivity extends FragmentActivity implements
 	// Value Variables
 	private String[] mDrawerTitles;
 	public String currentTitle = "";
+	public int aCurrentThemeResourceID = 0;
 
 	// Fragment Variables
 	private SettingsFragment fSettingsFragment;
@@ -40,6 +42,7 @@ public class MainActivity extends FragmentActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.initPreCreate();
 		setContentView(R.layout.activity_main);
 		this.initViewVariables();
 		this.initDrawerAdapter();
@@ -145,13 +148,51 @@ public class MainActivity extends FragmentActivity implements
 
 	}
 
-	private void initViewVariables() {// Assign variables
+	private void initPreCreate() {
+		// Process theme preference
+		boolean inverse = PreferenceManager.getDefaultSharedPreferences(this)
+				.getBoolean("preference_theme_colour_inverse", false);
+		switch (Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(
+				this).getString("preference_theme_colour", "-100"))) {
+		case -100:
+			System.out.println("Theme preference not set, defaulting to Red");
+		case 0:
+			System.out.println("Setting theme as Blue");
+			aCurrentThemeResourceID = inverse ? R.style.AppTheme_Blue_Inverse
+					: R.style.AppTheme_Blue;
+			break;
+		case 1:
+			System.out.println("Setting theme as Red");
+			aCurrentThemeResourceID = inverse ? R.style.AppTheme_Red_Inverse
+					: R.style.AppTheme_Red;
+			break;
+		case 2:
+			System.out.println("Setting theme as Green");
+			aCurrentThemeResourceID = inverse ? R.style.AppTheme_Green_Inverse
+					: R.style.AppTheme_Green;
+			break;
+		default:
+			break;
+		}
+		// Assign theme
+		setTheme(aCurrentThemeResourceID);
+	}
+
+	private void initViewVariables() {
+		// Assign variables
 		mDrawerLayout = (DrawerLayout) this.findViewById(R.id.activity_drawer);
 		mDrawer = (ListView) this.findViewById(R.id.activity_drawer_listview);
 		mFrameLayout = (FrameLayout) this.findViewById(R.id.activity_frame);
+
+		// Assign ActionBarDrawerToggle values
+		TypedArray a = getActionBar().getThemedContext()
+				.obtainStyledAttributes(aCurrentThemeResourceID,
+						new int[] { R.attr.ic_navigation });
+		int attributeResourceId = a.getResourceId(0, 0);
+
+		// Instantiate ActionBarToggle
 		mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-				R.drawable.ic_navigation_drawer,
-				R.string.activity_main_title_drawer_open,
+				attributeResourceId, R.string.activity_main_title_drawer_open,
 				R.string.fragment_main_title_drawer_closed) {
 			@Override
 			public void onDrawerClosed(View drawerView) {

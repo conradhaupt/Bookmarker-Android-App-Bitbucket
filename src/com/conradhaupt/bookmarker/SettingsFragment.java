@@ -3,7 +3,9 @@ package com.conradhaupt.bookmarker;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceScreen;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -50,4 +52,13 @@ public class SettingsFragment extends PreferenceFragment {
 		super.onAttach(activity);
 	}
 
+	@Override
+	public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
+			Preference preference) {
+		// Handle restart preference clicks
+		if (preference.getKey().equals("preference_about_restart")) {
+			this.getActivity().recreate();
+		}
+		return super.onPreferenceTreeClick(preferenceScreen, preference);
+	}
 }

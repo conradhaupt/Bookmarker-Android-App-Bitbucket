@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Preference Arrays -->
+    <string-array name="preference_theme_colours_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="preference_theme_colours">
+        <item>@string/preference_theme_colour_blue</item>
+        <item>@string/preference_theme_colour_red</item>
+        <item>@string/preference_theme_colour_green</item>
+    </string-array>
+
+    <!-- UI Arrays -->
     <string-array name="menu">
         <item>Books</item>
         <item>Settings</item>
@@ -18,5 +31,7 @@
         <item>Ninth</item>
         <item>Tenth</item>
     </string-array>
+
+    <!-- Book Creation Arrays -->
 
 </resources>

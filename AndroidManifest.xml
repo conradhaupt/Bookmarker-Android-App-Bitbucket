@@ -14,7 +14,6 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:logo="@drawable/ic_logo_dark"
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.conradhaupt.bookmarker.MainActivity"

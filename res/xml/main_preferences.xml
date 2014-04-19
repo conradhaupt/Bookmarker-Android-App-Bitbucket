@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:key="main_settings" android:title="Settings">
-    <PreferenceScreen android:key="main_screen_general" android:title="General">
-        
-    </PreferenceScreen><PreferenceScreen android:key="main_screen_lookandfeel" android:title="Look and Feel"></PreferenceScreen>
-    
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="main_settings"
+    android:title="Settings" >
+
+    <PreferenceCategory
+        android:key="preference_general"
+        android:title="@string/preference_general" >
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="preference_theme"
+        android:title="@string/preference_theme" >
+        <ListPreference
+            android:enabled="true"
+            android:entries="@array/preference_theme_colours"
+            android:entryValues="@array/preference_theme_colours_values"
+            android:key="preference_theme_colour"
+            android:title="@string/preference_theme_colour" />
+
+        <CheckBoxPreference
+            android:key="preference_theme_colour_inverse"
+            android:title="@string/preference_theme_inverse" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/preference_about" android:key="preference_about">
+        <Preference android:key="preference_about_restart" android:title="@string/preference_about_restart" android:enabled="true"/>
+        <Preference android:key="preference_about_copyright" android:title="@string/preference_about_copyright" android:selectable="false" android:enabled="true"/>
+    </PreferenceCategory>
 
 </PreferenceScreen>

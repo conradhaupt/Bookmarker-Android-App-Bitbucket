@@ -3,8 +3,9 @@
     android:id="@android:id/text1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
     android:gravity="center_vertical"
     android:minHeight="?android:attr/listPreferredItemHeightLarge"
+    android:paddingEnd="?android:attr/scrollbarSize"
     android:paddingLeft="@dimen/activity_drawer_item_padding_left"
     android:textAppearance="?android:attr/textAppearanceListItem" />
-

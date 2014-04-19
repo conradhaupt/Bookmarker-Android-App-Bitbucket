@@ -1,20 +1,39 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="AppBaseTheme" parent="android:Theme.Light"></style>
+    <style name="ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse"></style>
 
-    <style name="AppTheme" parent="AppBaseTheme">
-        <item name="android:actionBarStyle">@style/BMark_ActionBar</item>
-    </style>
-
-    <style name="AppTheme.Dialog" parent="@android:style/Theme.Holo.Light.Dialog.NoActionBar.MinWidth">
-        <item name="android:actionBarStyle">@style/BMark_ActionBar</item>
-    </style>
-
-    <style name="BMark_ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+    <style name="ActionBar.Blue">
         <item name="android:background">@color/bmark_blue_light</item>
-        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:logo">@drawable/ic_logo_holo_dark</item>
     </style>
 
-    <style name="BMark_textAppearanceLarge" parent="@android:style/TextAppearance.Holo.Large.Inverse"></style>
+    <style name="ActionBar.Red">
+        <item name="android:background">@color/bmark_red_light</item>
+        <item name="android:logo">@drawable/ic_logo_holo_dark</item>
+    </style>
+
+    <style name="ActionBar.Green">
+        <item name="android:background">@color/bmark_green_light</item>
+        <item name="android:logo">@drawable/ic_logo_holo_dark</item>
+    </style>
+
+    <style name="ActionBar.Blue.Inverse" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
+        <item name="android:background">@color/bmark_grey_light</item>
+        <item name="android:logo">@drawable/ic_logo_bmark_blue</item>
+    </style>
+
+    <style name="ActionBar.Red.Inverse" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
+        <item name="android:background">@color/bmark_grey_light</item>
+        <item name="android:logo">@drawable/ic_logo_bmark_red</item>
+    </style>
+
+    <style name="ActionBar.Green.Inverse" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
+        <item name="android:background">@color/bmark_grey_light</item>
+        <item name="android:logo">@drawable/ic_logo_bmark_green</item>
+    </style>
+
+    <style name="ActionBar.ActionButton">
+        <item name="android:background">?attr/selection_highlight_background</item>
+    </style>
 
 </resources>

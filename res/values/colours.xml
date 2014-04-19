@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="bmark_blue_light">#4485d3</color>
-    <color name="bmark_blue_normal">#2869b6</color>
-    <color name="bmark_blue_dark">#11519f</color>
-    <color name="bmark_red_dark">#9f1d11</color>
-    <color name="bmark_red_normal">#b63428</color>
+    <!-- App Theme Colours -->
+    <color name="bmark_blue_light">#4585d3</color>
+    <color name="bmark_blue_normal">#2969b7</color>
+    <color name="bmark_blue_dark">#1252a0</color>
+    <color name="bmark_red_dark">#a01e12</color>
+    <color name="bmark_red_normal">#b73529</color>
     <color name="bmark_red_light">#d35145</color>
+    <color name="bmark_green_dark">#27af45</color>
+    <color name="bmark_green_normal">#3bc459</color>
+    <color name="bmark_green_light">#54dd72</color>
+    <color name="bmark_grey_1">#545454</color>
+    <color name="bmark_grey_2">#666666</color>
+    <color name="bmark_grey_3">#7e7e7e</color>
+    <color name="bmark_grey_4">#b2b2b2</color>
+    <color name="bmark_grey_5">#cccccc</color>
+    <color name="bmark_grey_6">#e3e3e3</color>
+    <color name="bmark_grey_dark">#212121</color>
+    <color name="bmark_grey_light">#dddddd</color>
 
 </resources>
