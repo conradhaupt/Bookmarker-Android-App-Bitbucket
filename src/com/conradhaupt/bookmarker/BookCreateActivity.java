@@ -28,6 +28,7 @@ public class BookCreateActivity extends FragmentActivity implements
 		super.onCreate(savedInstanceState);
 		initPreCreate();
 		setContentView(R.layout.activity_book_create);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 	@Override

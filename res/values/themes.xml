@@ -42,6 +42,7 @@
         <item name="ic_view_as_list">@drawable/ic_view_as_list_holo_dark</item>
         <item name="ic_warning">@drawable/ic_warning_holo_dark</item>
         <item name="ic_web_site">@drawable/ic_web_site_holo_dark</item>
+        <item name="ic_action_home">@drawable/ic_action_home_holo_dark</item>
     </style>
 
     <style name="AppTheme.Blue">
@@ -83,6 +84,7 @@
         <item name="ic_view_as_list">@drawable/ic_view_as_list_holo_dark</item>
         <item name="ic_warning">@drawable/ic_warning_holo_dark</item>
         <item name="ic_web_site">@drawable/ic_web_site_holo_dark</item>
+        <item name="ic_action_home">@drawable/ic_action_home_holo_dark</item>
     </style>
 
     <style name="AppTheme.Red">
@@ -124,6 +126,7 @@
         <item name="ic_view_as_list">@drawable/ic_view_as_list_holo_dark</item>
         <item name="ic_warning">@drawable/ic_warning_holo_dark</item>
         <item name="ic_web_site">@drawable/ic_web_site_holo_dark</item>
+        <item name="ic_action_home">@drawable/ic_action_home_holo_dark</item>
     </style>
 
     <style name="AppTheme.Green">
@@ -165,6 +168,7 @@
         <item name="ic_view_as_list">@drawable/ic_view_as_list_holo_dark</item>
         <item name="ic_warning">@drawable/ic_warning_holo_dark</item>
         <item name="ic_web_site">@drawable/ic_web_site_holo_dark</item>
+        <item name="ic_action_home">@drawable/ic_action_home_holo_dark</item>
     </style>
 
     <style name="AppTheme.Blue.Inverse">
@@ -203,6 +207,7 @@
         <item name="ic_view_as_list">@drawable/ic_view_as_list_bmark_blue</item>
         <item name="ic_warning">@drawable/ic_warning_bmark_blue</item>
         <item name="ic_web_site">@drawable/ic_web_site_bmark_blue</item>
+        <item name="ic_action_home">@drawable/ic_action_home_bmark_blue</item>
     </style>
 
     <style name="AppTheme.Red.Inverse">
@@ -241,6 +246,7 @@
         <item name="ic_view_as_list">@drawable/ic_view_as_list_bmark_red</item>
         <item name="ic_warning">@drawable/ic_warning_bmark_red</item>
         <item name="ic_web_site">@drawable/ic_web_site_bmark_red</item>
+        <item name="ic_action_home">@drawable/ic_action_home_bmark_red</item>
     </style>
 
     <style name="AppTheme.Green.Inverse">
@@ -279,6 +285,7 @@
         <item name="ic_view_as_list">@drawable/ic_view_as_list_bmark_green</item>
         <item name="ic_warning">@drawable/ic_warning_bmark_green</item>
         <item name="ic_web_site">@drawable/ic_web_site_bmark_green</item>
+        <item name="ic_action_home">@drawable/ic_action_home_bmark_green</item>
     </style>
 
 </resources>
