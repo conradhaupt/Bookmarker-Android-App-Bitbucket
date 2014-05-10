@@ -13,12 +13,10 @@
     <dimen name="preference_icon_minWidth">0dp</dimen>
 
     <!-- Specific Dimensions -->
-
+    <dimen name="fragment_book_information_edittext_margin_top">6dp</dimen>
 
     <!-- Specific Drawable Dimensions -->
     <dimen name="fragment_book_title_height">48dp</dimen>
     <dimen name="fragment_book_item_height">48dp</dimen>
-
-    <!-- Global Drawable Dimensions -->
 
 </resources>

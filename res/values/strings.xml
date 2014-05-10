@@ -19,6 +19,7 @@
     <string name="fragment_books_menu_sort_alphabetical">Alphabetical</string>
     <string name="fragment_books_menu_sort_date">Date</string>
     <string name="fragment_books_menu_sort_random">Random</string>
+    <string name="dialog_settings_about_close">Close</string>
 
     <!-- Preference Values -->
     <string name="preference_general">General</string>
@@ -33,9 +34,17 @@
     <string name="preference_about_copyright">Conrad Haupt © 2014</string>
 
     <!-- Book Property Values -->
-    <string name="book_preference_information">Information</string>
-    <string name="book_preference_information_title">Title</string>
-    <string name="book_preference_information_author">Author</string>
-    <string name="book_preference_information_isbn">ISBN</string>
+    <string name="fragment_book_information_category">Book details</string>
+    <string name="fragment_book_information_title_hint">Title</string>
+    <string name="fragment_book_information_author_hint">Author</string>
+    <string name="fragment_book_information_isbn_error">ISBN is invalid</string>
+    <string name="fragment_book_information_isbn_error_char">Invalid input</string>
+    <string name="fragment_book_information_isbn_hint">ISBN</string>
+    <string name="fragment_book_information_page_count_hint"></string>
+    <string name="book_information">Information</string>
+    <string name="book_information_title">Title</string>
+    <string name="book_information_author">Author</string>
+    <string name="book_information_isbn">ISBN</string>
+    <string name="book_information_page_count">Page count</string>
 
 </resources>

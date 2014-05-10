@@ -15,7 +15,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
-import com.conradhaupt.bookmarker.backend.NavDrawerAdapter;
+import com.conradhaupt.bookmarker.ui.NavDrawerAdapter;
 
 public class MainActivity extends FragmentActivity implements
 		OnItemClickListener {

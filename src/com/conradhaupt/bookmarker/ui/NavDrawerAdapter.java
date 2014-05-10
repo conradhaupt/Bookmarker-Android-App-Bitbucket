@@ -1,4 +1,4 @@
-package com.conradhaupt.bookmarker.backend;
+package com.conradhaupt.bookmarker.ui;
 
 import android.content.Context;
 import android.graphics.Typeface;

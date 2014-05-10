@@ -1,6 +1,7 @@
 package com.conradhaupt.bookmarker;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -59,11 +60,6 @@ public class BooksFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// if (getArguments() != null)
-		// {
-		// mParam1 = getArguments().getString(ARG_PARAM1);
-		// mParam2 = getArguments().getString(ARG_PARAM2);
-		// }
 		setHasOptionsMenu(true);
 	}
 
@@ -93,6 +89,8 @@ public class BooksFragment extends Fragment {
 	private void onAddBook() {
 		System.out.println("Add book pressed");
 		// TODO add code to add a book
+		Intent intent = new Intent(this.getActivity(), BookCreateActivity.class);
+		startActivity(intent);
 	}
 
 	private void onViewList() {

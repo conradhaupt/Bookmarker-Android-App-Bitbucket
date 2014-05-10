@@ -13,6 +13,7 @@
         <item name="android:actionBarItemBackground">@drawable/selection_hightlight_background_blue</item>
         <item name="android:selectableItemBackground">@drawable/selection_hightlight_background_blue_light</item>
         <item name="android:actionButtonStyle">@style/ActionBar.ActionButton</item>
+
         <!-- Drawables -->
         <item name="ic_accept">@drawable/ic_accept_holo_dark</item>
         <item name="ic_bad">@drawable/ic_bad_holo_dark</item>
@@ -50,6 +51,9 @@
         <item name="selection_highlight_background">@drawable/selection_hightlight_background_blue</item>
         <item name="android:actionBarItemBackground">@drawable/selection_hightlight_background_blue</item>
         <item name="android:selectableItemBackground">@drawable/selection_hightlight_background_blue_light</item>
+        <item name="colour_light">@color/bmark_blue_light</item>
+        <item name="colour_normal">@color/bmark_blue_normal</item>
+        <item name="colour_dark">@color/bmark_blue_dark</item>
 
         <!-- Drawables -->
         <item name="ic_accept">@drawable/ic_accept_holo_dark</item>
@@ -88,6 +92,9 @@
         <item name="selection_highlight_background">@drawable/selection_hightlight_background_red</item>
         <item name="android:actionBarItemBackground">@drawable/selection_hightlight_background_red</item>
         <item name="android:selectableItemBackground">@drawable/selection_hightlight_background_red_light</item>
+        <item name="colour_light">@color/bmark_red_light</item>
+        <item name="colour_normal">@color/bmark_red_normal</item>
+        <item name="colour_dark">@color/bmark_red_dark</item>
 
         <!-- Drawables -->
         <item name="ic_accept">@drawable/ic_accept_holo_dark</item>
@@ -126,6 +133,9 @@
         <item name="selection_highlight_background">@drawable/selection_hightlight_background_green</item>
         <item name="android:actionBarItemBackground">@drawable/selection_hightlight_background_green</item>
         <item name="android:selectableItemBackground">@drawable/selection_hightlight_background_green_light</item>
+        <item name="colour_light">@color/bmark_green_light</item>
+        <item name="colour_normal">@color/bmark_green_normal</item>
+        <item name="colour_dark">@color/bmark_green_dark</item>
 
         <!-- Drawables -->
         <item name="ic_accept">@drawable/ic_accept_holo_dark</item>

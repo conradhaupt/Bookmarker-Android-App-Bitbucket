@@ -1,5 +1,6 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Theme Specific Styles -->
     <style name="ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse"></style>
 
     <style name="ActionBar.Blue">
@@ -35,5 +36,7 @@
     <style name="ActionBar.ActionButton">
         <item name="android:background">?attr/selection_highlight_background</item>
     </style>
+
+    <!-- Non-theme Specific -->
 
 </resources>
