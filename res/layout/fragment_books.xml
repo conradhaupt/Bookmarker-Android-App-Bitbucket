@@ -1,8 +1,13 @@
 <GridView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_books_grid_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:horizontalSpacing="@dimen/fragment_books_grid_view_spacing"
+    android:numColumns="@integer/fragment_books_grid_view_num_columns"
     android:orientation="vertical"
+    android:padding="@dimen/fragment_books_grid_view_spacing"
+    android:verticalSpacing="@dimen/fragment_books_grid_view_spacing"
     tools:context=".BooksFragment" >
 
 </GridView>

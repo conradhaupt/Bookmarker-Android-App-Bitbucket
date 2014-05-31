@@ -13,6 +13,7 @@
         <item name="android:actionBarItemBackground">@drawable/selection_hightlight_background_blue</item>
         <item name="android:selectableItemBackground">@drawable/selection_hightlight_background_blue_light</item>
         <item name="android:actionButtonStyle">@style/ActionBar.ActionButton</item>
+        <item name="android:actionOverflowButtonStyle">@style/actionOverflowButtonStyle</item>
 
         <!-- Drawables -->
         <item name="ic_accept">@drawable/ic_accept_holo_dark</item>
@@ -42,7 +43,6 @@
         <item name="ic_view_as_list">@drawable/ic_view_as_list_holo_dark</item>
         <item name="ic_warning">@drawable/ic_warning_holo_dark</item>
         <item name="ic_web_site">@drawable/ic_web_site_holo_dark</item>
-        <item name="ic_action_home">@drawable/ic_action_home_holo_dark</item>
     </style>
 
     <style name="AppTheme.Blue">
@@ -55,6 +55,7 @@
         <item name="colour_light">@color/bmark_blue_light</item>
         <item name="colour_normal">@color/bmark_blue_normal</item>
         <item name="colour_dark">@color/bmark_blue_dark</item>
+        <item name="text_colour_activated">@color/bmark_blue_activated</item>
 
         <!-- Drawables -->
         <item name="ic_accept">@drawable/ic_accept_holo_dark</item>
@@ -68,7 +69,7 @@
         <item name="ic_edit">@drawable/ic_edit_holo_dark</item>
         <item name="ic_labels">@drawable/ic_labels_holo_dark</item>
         <item name="ic_logo">@drawable/ic_logo_holo_dark</item>
-        <item name="ic_more">@drawable/ic_more_holo_dark</item>
+        <item name="ic_more">@drawable/ic_more_bmark_blue</item>
         <item name="ic_navigation">@drawable/ic_navigation_holo_dark</item>
         <item name="ic_new">@drawable/ic_new_holo_dark</item>
         <item name="ic_new_label">@drawable/ic_new_label_holo_dark</item>
@@ -84,7 +85,6 @@
         <item name="ic_view_as_list">@drawable/ic_view_as_list_holo_dark</item>
         <item name="ic_warning">@drawable/ic_warning_holo_dark</item>
         <item name="ic_web_site">@drawable/ic_web_site_holo_dark</item>
-        <item name="ic_action_home">@drawable/ic_action_home_holo_dark</item>
     </style>
 
     <style name="AppTheme.Red">
@@ -97,6 +97,7 @@
         <item name="colour_light">@color/bmark_red_light</item>
         <item name="colour_normal">@color/bmark_red_normal</item>
         <item name="colour_dark">@color/bmark_red_dark</item>
+        <item name="text_colour_activated">@color/bmark_red_activated</item>
 
         <!-- Drawables -->
         <item name="ic_accept">@drawable/ic_accept_holo_dark</item>
@@ -126,7 +127,6 @@
         <item name="ic_view_as_list">@drawable/ic_view_as_list_holo_dark</item>
         <item name="ic_warning">@drawable/ic_warning_holo_dark</item>
         <item name="ic_web_site">@drawable/ic_web_site_holo_dark</item>
-        <item name="ic_action_home">@drawable/ic_action_home_holo_dark</item>
     </style>
 
     <style name="AppTheme.Green">
@@ -139,6 +139,7 @@
         <item name="colour_light">@color/bmark_green_light</item>
         <item name="colour_normal">@color/bmark_green_normal</item>
         <item name="colour_dark">@color/bmark_green_dark</item>
+        <item name="text_colour_activated">@color/bmark_green_activated</item>
 
         <!-- Drawables -->
         <item name="ic_accept">@drawable/ic_accept_holo_dark</item>
@@ -168,7 +169,6 @@
         <item name="ic_view_as_list">@drawable/ic_view_as_list_holo_dark</item>
         <item name="ic_warning">@drawable/ic_warning_holo_dark</item>
         <item name="ic_web_site">@drawable/ic_web_site_holo_dark</item>
-        <item name="ic_action_home">@drawable/ic_action_home_holo_dark</item>
     </style>
 
     <style name="AppTheme.Blue.Inverse">
@@ -207,7 +207,6 @@
         <item name="ic_view_as_list">@drawable/ic_view_as_list_bmark_blue</item>
         <item name="ic_warning">@drawable/ic_warning_bmark_blue</item>
         <item name="ic_web_site">@drawable/ic_web_site_bmark_blue</item>
-        <item name="ic_action_home">@drawable/ic_action_home_bmark_blue</item>
     </style>
 
     <style name="AppTheme.Red.Inverse">
@@ -246,7 +245,6 @@
         <item name="ic_view_as_list">@drawable/ic_view_as_list_bmark_red</item>
         <item name="ic_warning">@drawable/ic_warning_bmark_red</item>
         <item name="ic_web_site">@drawable/ic_web_site_bmark_red</item>
-        <item name="ic_action_home">@drawable/ic_action_home_bmark_red</item>
     </style>
 
     <style name="AppTheme.Green.Inverse">
@@ -285,7 +283,6 @@
         <item name="ic_view_as_list">@drawable/ic_view_as_list_bmark_green</item>
         <item name="ic_warning">@drawable/ic_warning_bmark_green</item>
         <item name="ic_web_site">@drawable/ic_web_site_bmark_green</item>
-        <item name="ic_action_home">@drawable/ic_action_home_bmark_green</item>
     </style>
 
 </resources>

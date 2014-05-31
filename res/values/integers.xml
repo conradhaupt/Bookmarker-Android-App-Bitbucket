@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Backend values -->
     <integer name="maxPageCount">10000</integer>
+    <integer name="maxChapterCount">50</integer>
     <integer name="maxParagraphCount">20</integer>
     <integer name="maxSentenceCount">10</integer>
+
+    <!-- Activity and Fragment specific values -->
+    <integer name="fragment_books_grid_view_num_columns">2</integer>
 
 </resources>

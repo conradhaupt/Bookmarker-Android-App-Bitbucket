@@ -27,6 +27,9 @@
         android:background="@android:color/transparent"
         android:paddingLeft="5dp"
         android:scrollHorizontally="true"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium" >
+
+        <requestFocus />
+    </EditText>
 
 </LinearLayout>

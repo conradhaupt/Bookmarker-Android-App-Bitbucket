@@ -1,12 +1,7 @@
 package com.conradhaupt.bookmarker;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.text.Editable;
-import android.text.InputFilter;
-import android.text.Spanned;
-import android.text.TextWatcher;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,26 +10,37 @@ import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.conradhaupt.bookmarker.BookCreateActivity.BookCreateFragmentInterface;
 import com.conradhaupt.bookmarker.BookCreateActivity.BookCreateInformationInterface;
 import com.conradhaupt.bookmarker.backend.ISBNChecker;
-import com.conradhaupt.bookmarker.backend.ISBNChecker.ISBN;
 import com.conradhaupt.bookmarker.sqlite.model.Book;
 
 public class BookInformationFragment extends Fragment implements
-		BookCreateInformationInterface {
+		BookCreateInformationInterface, BookCreateFragmentInterface {
 	/* Variables */
 	// Object Variables
-	private BookInformationInterface fBookInformationInterface = null;
-	private Book fBook = null;
+	private Book fBook = new Book();
 
 	// View Variables
 	private EditText fTitleEditText;
 	private EditText fAuthorEditText;
 	private EditText fISBNEditText;
+	private EditText fPageCountEditText;
 
 	// Static Variables
 
 	/* Methods */
+	public static BookInformationFragment newInstance(Book book) {
+		// Create and initialize fragment
+		BookInformationFragment bookInformationFragment = new BookInformationFragment();
+
+		// Set Values
+		bookInformationFragment.setValues(book == null ? null : book);
+
+		// Return BookInformationFragment
+		return bookInformationFragment;
+	}
+
 	public static BookInformationFragment newInstance() {
 		BookInformationFragment fragment = new BookInformationFragment();
 		return fragment;
@@ -42,28 +48,6 @@ public class BookInformationFragment extends Fragment implements
 
 	public BookInformationFragment() {
 		// Required empty public constructor
-	}
-
-	@Override
-	public void onAttach(Activity activity) {
-		// Assign interface variables
-		try {
-			fBookInformationInterface = (BookInformationInterface) activity;
-			fBook = fBookInformationInterface.onBookInformationGet();
-		} catch (Exception e) {
-			System.out
-					.println("Activity attached to does not implement interface for BookInformationFragment");
-		}
-		super.onAttach(activity);
-	}
-
-	@Override
-	public void onDetach() {
-		// Nullify interface variables
-		fBookInformationInterface.onBookInformationFinished(getBook());
-		fBookInformationInterface = null;
-
-		super.onDetach();
 	}
 
 	@Override
@@ -80,23 +64,67 @@ public class BookInformationFragment extends Fragment implements
 	}
 
 	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		// Initialize views
-		initViewVariables();
-		super.onActivityCreated(savedInstanceState);
-	}
-
-	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
 		inflater.inflate(R.menu.fragment_book_information, menu);
 	}
 
+	@Override
+	public void onStart() {
+		super.onStart();
+		// Initialize View Variables
+		initViewVariables();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		// Process Books
+		processBook();
+	}
+
+	public void setValues(Book book) {
+		// Handle null value
+		System.out.println("Setting BookInformationFragment values");
+		if (book == null) {
+			fBook = new Book();
+		} else {
+			fBook = book;
+		}
+	}
+
 	private void updateBook() {
-		// Assign new values
-		fBook.setTitle(fTitleEditText.getText().toString());
-		fBook.setAuthor(fAuthorEditText.getText().toString());
-		fBook.setIsbn(fISBNEditText.getText().toString());
+		// Assign new values if they exist
+		if (!fTitleEditText.getText().toString().equalsIgnoreCase("")) {
+			fBook.setTitle(fTitleEditText.getText().toString());
+		}
+		if (!fAuthorEditText.getText().toString().equalsIgnoreCase("")) {
+			fBook.setAuthor(fAuthorEditText.getText().toString());
+		}
+		if (!fISBNEditText.getText().toString().equalsIgnoreCase("")) {
+			fBook.setIsbn(fISBNEditText.getText().toString());
+		}
+		if (!fPageCountEditText.getText().toString().equals("0")
+				&& !fPageCountEditText.getText().toString().equals("")) {
+			fBook.setPageCount(Integer.parseInt(fPageCountEditText.getText()
+					.toString()));
+
+			// Handle negative numbers
+			if (fBook.getPageCount() < 0) {
+				System.out
+						.println("Page count was negative, setting page count as 0");
+				fBook.setPageCount(0);
+			}
+		}
+	}
+
+	public void processBook() {
+		// Assign book values to views
+		System.out.println("Processing book");
+		fTitleEditText.setText(fBook.getTitle());
+		fAuthorEditText.setText(fBook.getAuthor());
+		fISBNEditText.setText(fBook.getIsbn());
+		fPageCountEditText.setText(fBook.getPageCount() + "");
 	}
 
 	private void initViewVariables() {
@@ -107,8 +135,50 @@ public class BookInformationFragment extends Fragment implements
 				R.id.creation_author_edittext);
 		fISBNEditText = (EditText) this.getActivity().findViewById(
 				R.id.creation_isbn_edittext);
+		fPageCountEditText = (EditText) this.getActivity().findViewById(
+				R.id.creation_page_count_edittext);
+		System.out.println("Views created");
 
-		// Add formatter for ISBNEditText
+		// Add error checker for PageCountEditText
+		fPageCountEditText
+				.setOnFocusChangeListener(new OnFocusChangeListener() {
+
+					@Override
+					public void onFocusChange(View v, boolean hasFocus) {
+						// Verify value
+
+						// Test empty condition
+						if (fPageCountEditText.getText().toString().equals("")) {
+							fPageCountEditText
+									.setError(getResources()
+											.getString(
+													R.string.fragment_book_information_page_count_error_none));
+
+							return;
+						}
+
+						try {
+							int pageCount = Integer.parseInt(fPageCountEditText
+									.getText().toString());
+							if (pageCount == 0) {
+								fPageCountEditText
+										.setError(getResources()
+												.getString(
+														R.string.fragment_book_information_page_count_error_zero));
+							} else if (pageCount < 0) {
+								fPageCountEditText
+										.setError(getResources()
+												.getString(
+														R.string.fragment_book_information_page_count_error_neg));
+							} else {
+								fPageCountEditText.setError(null);
+							}
+						} catch (Exception e) {
+						}
+					}
+				});
+
+		// Add error checker for ISBNEditText
 		fISBNEditText.setOnFocusChangeListener(new OnFocusChangeListener() {
 
 			@Override
@@ -172,16 +242,35 @@ public class BookInformationFragment extends Fragment implements
 		});
 	}
 
-	/* Classes */
-	public interface BookInformationInterface {
-		public abstract Book onBookInformationGet();
-
-		public abstract boolean onBookInformationFinished(Book book);
-	}
-
 	@Override
 	public Book getBook() {
 		updateBook();
 		return this.fBook;
+	}
+
+	@Override
+	public boolean canProceed() {
+		boolean canProceed = true;
+
+		System.out.println("CanProceed Run");
+
+		// Check all requirements
+		if (fISBNEditText.getError() != null) {
+			canProceed = false;
+		}
+		if (fPageCountEditText.getError() != null) {
+			canProceed = false;
+		}
+		if (fTitleEditText.getText().toString().equals("")) {
+			canProceed = false;
+		}
+		if (fAuthorEditText.getText().toString().equals("")) {
+			canProceed = false;
+		}
+
+		System.out.println("CanProceed is " + canProceed);
+
+		// Return result
+		return canProceed;
 	}
 }

@@ -1,32 +1,50 @@
 package com.conradhaupt.bookmarker;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
+import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.NumberPicker;
+import android.widget.TextView;
 
 import com.conradhaupt.bookmarker.BookCreateActivity.BookCreateBookmarksInterface;
+import com.conradhaupt.bookmarker.BookCreateActivity.BookCreateFragmentInterface;
 import com.conradhaupt.bookmarker.sqlite.model.Bookmark;
 
 public class BookBookmarksFragment extends Fragment implements
-		BookCreateBookmarksInterface {
+		BookCreateBookmarksInterface, BookCreateFragmentInterface {
 	/* Variables */
 	// Object Variables
-	private BookBookmarksInterface fBookBookmarksInterface = null;
-	private ArrayList<Bookmark> bookmarks;
+	private Bookmark bookmark;
+	private int maxPageCount;
 
 	// View Variables
+	private NumberPicker page;
+	private NumberPicker chapter;
+	private NumberPicker paragraph;
+	private NumberPicker sentence;
 
 	// Methods
-	public static BookBookmarksFragment newInstance() {
+	public static BookBookmarksFragment newInstance(Bookmark bookmark,
+			int maxPageCount) {
+		// Create and initialize fragment
 		BookBookmarksFragment fragment = new BookBookmarksFragment();
+
+		// Set Values
+		fragment.setValues(bookmark == null ? null : bookmark,
+				maxPageCount == -1 ? -1 : maxPageCount);
+
+		// Return fragment
 		return fragment;
+	}
+
+	public static BookBookmarksFragment newInstance() {
+		return newInstance(null, -1);
 	}
 
 	public BookBookmarksFragment() {
@@ -36,6 +54,18 @@ public class BookBookmarksFragment extends Fragment implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		initViewVariables();
 	}
 
 	@Override
@@ -52,43 +82,141 @@ public class BookBookmarksFragment extends Fragment implements
 		inflater.inflate(R.menu.fragment_book_bookmarks, menu);
 	}
 
-	@Override
-	public void onAttach(Activity activity) {
-		// Assign interfaces
-		fBookBookmarksInterface = (BookBookmarksInterface) activity;
-
-		super.onAttach(activity);
+	public void setValues(Bookmark bookmark, int maxPageCount) {
+		// Handle null value
+		if (bookmark == null) {
+			this.bookmark = new Bookmark();
+		} else {
+			this.bookmark = bookmark;
+		}
+		if (maxPageCount == -1) {
+			this.maxPageCount = 10000;
+		} else {
+			this.maxPageCount = maxPageCount;
+		}
 	}
 
-	@Override
-	public void onDetach() {
-		// Nullify Interfaces
-		fBookBookmarksInterface.onBookBookmarksFinished(this.getBookmarks());
-		fBookBookmarksInterface = null;
-
-		super.onDetach();
+	private void updateBookmark() {
+		// Retrieve values and assign to bookmark
+		bookmark.setPage(page.getValue());
+		bookmark.setChapter(chapter.getValue());
+		bookmark.setParagraph(paragraph.getValue());
+		bookmark.setSentence(sentence.getValue());
 	}
 
-	private void updateArrayList() {
+	public void processBookmark() {
+		// Assign view values
+		page.setMaxValue(maxPageCount);
+		page.setMinValue(0);
+		page.setValue(bookmark.getPage());
+		chapter.setMaxValue(getResources()
+				.getInteger(R.integer.maxChapterCount));
+		chapter.setMinValue(0);
+		chapter.setValue(bookmark.getChapter());
+		paragraph.setMaxValue(getResources().getInteger(
+				R.integer.maxParagraphCount));
+		paragraph.setMinValue(0);
+		paragraph.setValue(bookmark.getParagraph());
+		sentence.setMaxValue(getResources().getInteger(
+				R.integer.maxSentenceCount));
+		sentence.setMinValue(0);
+		sentence.setValue(bookmark.getSentence());
 
 	}
 
 	private void initViewVariables() {
-		// Initialize all view variables from current fragment
-	}
+		// Initialize all views
+		page = (NumberPicker) getActivity().findViewById(
+				R.id.creation_bookmark_page_numberpicker);
+		chapter = (NumberPicker) getActivity().findViewById(
+				R.id.creation_bookmark_chapter_numberpicker);
+		paragraph = (NumberPicker) getActivity().findViewById(
+				R.id.creation_bookmark_paragraph_numberpicker);
+		sentence = (NumberPicker) getActivity().findViewById(
+				R.id.creation_bookmark_sentence_numberpicker);
 
-	/* Interface Methods and Classes */
-	public interface BookBookmarksInterface {
-		public abstract ArrayList<Bookmark> onBookBookmarksGet();
+		// Add values to bookmark
+		processBookmark();
 
-		public abstract boolean onBookBookmarksFinished(
-				ArrayList<Bookmark> bookmarks);
+		// Assign listeners
+		page.setOnValueChangedListener(new OnBookmarkValueChangeTitleListener()
+				.setTitle(this.getActivity(),
+						R.id.creation_bookmark_page_textview));
+		chapter.setOnValueChangedListener(new OnBookmarkValueChangeTitleListener()
+				.setTitle(this.getActivity(),
+						R.id.creation_bookmark_chapter_textview));
+		paragraph
+				.setOnValueChangedListener(new OnBookmarkValueChangeTitleListener()
+						.setTitle(this.getActivity(),
+								R.id.creation_bookmark_paragraph_textview));
+		sentence.setOnValueChangedListener(new OnBookmarkValueChangeTitleListener()
+				.setTitle(this.getActivity(),
+						R.id.creation_bookmark_sentence_textview));
 	}
 
 	@Override
-	public ArrayList<Bookmark> getBookmarks() {
+	public Bookmark getBookmark() {
 		// Return arraylist
-		updateArrayList();
-		return bookmarks;
+		updateBookmark();
+		return bookmark;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+	}
+
+	@Override
+	public boolean canProceed() {
+		return true;
+	}
+
+	/* Classes */
+	private class OnBookmarkValueChangeTitleListener implements
+			NumberPicker.OnValueChangeListener {
+		/* Variables */
+		// Object Variables
+		private Context context;
+		private int id;
+		private TextView title;
+
+		// Static Variables
+
+		/* Methods */
+		@Override
+		public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+			// Handle empty value
+			System.out.println("Value changed to " + newVal
+					+ " with title null being " + (title == null));
+			if (newVal == 0 && title != null) {
+				title.setActivated(false);
+			} else if (newVal != 0 && title != null) {
+				title.setActivated(true);
+			} else {
+				try {
+					title.setActivated(false);
+				} catch (Exception e) {
+				}
+			}
+		}
+
+		public OnBookmarkValueChangeTitleListener setTitle(
+				final Context context, final int id) {
+			// Assign variable values
+			this.context = context;
+			this.id = id;
+
+			// Initialize
+			recalculateView();
+
+			// Return this object
+			return this;
+		}
+
+		private void recalculateView() {
+			// Assign view new value
+			Activity activity = (Activity) context;
+			title = (TextView) activity.findViewById(id);
+		}
 	}
 }

@@ -7,14 +7,16 @@ public class Bookmark implements BaseColumns {
 	// Object Variables
 	private long id;
 	private long bookId;
-	private int page;
-	private int chapter;
-	private int paragraph;
-	private int sentence;
+	private String title;
+	private int page = 0;
+	private int chapter = 0;
+	private int paragraph = 0;
+	private int sentence = 0;
 
 	// Static Variables
 	public static final String TABLE_NAME = "tbl_bookmarks";
 	public static final String COLUMN_BOOK_ID = "bookId";
+	public static final String COLUMN_TITLE = "title";
 	public static final String COLUMN_PAGE = "page";
 	public static final String COLUMN_CHAPTER = "chapter";
 	public static final String COLUMN_PARAGRAPH = "paragraph";
@@ -28,11 +30,12 @@ public class Bookmark implements BaseColumns {
 
 	}
 
-	public Bookmark(long id, long bookId, int page, int chapter, int paragraph,
-			int sentence) {
+	public Bookmark(long id, long bookId, String title, int page, int chapter,
+			int paragraph, int sentence) {
 		super();
 		this.id = id;
 		this.bookId = bookId;
+		this.title = title;
 		this.page = page;
 		this.chapter = chapter;
 		this.paragraph = paragraph;
@@ -67,6 +70,21 @@ public class Bookmark implements BaseColumns {
 	 */
 	public void setBookId(long bookId) {
 		this.bookId = bookId;
+	}
+
+	/**
+	 * @return the title
+	 */
+	public String getTitle() {
+		return title;
+	}
+
+	/**
+	 * @param title
+	 *            the title to set
+	 */
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	/**
@@ -128,8 +146,4 @@ public class Bookmark implements BaseColumns {
 	public void setSentence(int sentence) {
 		this.sentence = sentence;
 	}
-
-	/*
-	 * Methods and variables for interface Parcelable
-	 */
 }

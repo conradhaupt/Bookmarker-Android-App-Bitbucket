@@ -40,11 +40,22 @@
     <string name="fragment_book_information_isbn_error">ISBN is invalid</string>
     <string name="fragment_book_information_isbn_error_char">Invalid input</string>
     <string name="fragment_book_information_isbn_hint">ISBN</string>
-    <string name="fragment_book_information_page_count_hint"></string>
-    <string name="book_information">Information</string>
-    <string name="book_information_title">Title</string>
-    <string name="book_information_author">Author</string>
-    <string name="book_information_isbn">ISBN</string>
-    <string name="book_information_page_count">Page count</string>
+    <string name="fragment_book_information_page_count_hint">Pages</string>
+    <string name="fragment_book_information_page_count_error_zero">You can\'t have zero pages</string>
+    <string name="fragment_book_information_page_count_error_neg">You can\'t have negative pages</string>
+    <string name="fragment_book_information_page_count_error_none">You need to have pages in the book</string>
+    <string name="fragment_book_bookmarks_category">Bookmark</string>
+    <string name="fragment_book_bookmarks_page">Page</string>
+    <string name="fragment_book_bookmarks_chapter">Chapter</string>
+    <string name="fragment_book_bookmarks_paragraph">Paragraph</string>
+    <string name="fragment_book_bookmarks_sentence">Sentence</string>
+    <string name="activity_book_create_create">Create</string>
+    <string name="activity_book_create_save">Save</string>
+    <string name="activity_book_create_cancel">Cancel</string>
+    <string name="activity_book_create_error">Double check your values</string>
+    <string name="activity_book_create_error_unknown">An unknown error occurred</string>
+    <string name="activity_book_create_ok"></string>
+    <string name="book_list_menu_edit">Edit</string>
+    <string name="book_list_menu_delete">Delete</string>    
 
 </resources>

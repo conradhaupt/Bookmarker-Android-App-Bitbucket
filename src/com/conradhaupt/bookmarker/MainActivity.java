@@ -70,18 +70,18 @@ public class MainActivity extends FragmentActivity implements
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 
-		try {
-			outState.putBoolean(
-					"settingsFragment",
-					this.getFragmentManager()
-							.getBackStackEntryAt(
-									this.getFragmentManager()
-											.getBackStackEntryCount() - 1)
-							.getName().equals("fSettingsFragment") ? true
-							: false);
-		} catch (Exception e) {
-			System.out.println(e);
-		}
+		// try {
+		// outState.putBoolean(
+		// "settingsFragment",
+		// this.getFragmentManager()
+		// .getBackStackEntryAt(
+		// this.getFragmentManager()
+		// .getBackStackEntryCount() - 1)
+		// .getName().equals("fSettingsFragment") ? true
+		// : false);
+		// } catch (Exception e) {
+		// System.out.println(e);
+		// }
 		super.onSaveInstanceState(outState);
 	}
 

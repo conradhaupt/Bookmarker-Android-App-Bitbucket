@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Activity and Fragment specific values -->
+    <integer name="fragment_books_grid_view_num_columns">3</integer>
+
+</resources>

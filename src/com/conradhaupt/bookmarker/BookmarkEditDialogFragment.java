@@ -16,7 +16,8 @@ import com.conradhaupt.bookmarker.sqlite.model.Bookmark;
  */
 public class BookmarkEditDialogFragment extends Fragment {
 	/* Variables */
-	// Object Variables	
+	// Object Variables
+	private String title;
 	private int page;
 	private int chapter;
 	private int paragraph;

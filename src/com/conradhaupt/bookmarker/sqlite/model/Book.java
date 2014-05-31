@@ -1,16 +1,21 @@
 package com.conradhaupt.bookmarker.sqlite.model;
 
+import java.util.List;
+
 import android.provider.BaseColumns;
 
 public class Book implements BaseColumns {
 
 	/* Variables */
 	// Object Variables
-	private long id;
+	private long id = -1;
 	private String isbn;
 	private String title;
 	private String author;
 	private int pageCount;
+
+	// This variable is used to combine the two classes into one for ease of use
+	public List<Bookmark> bookmarks;
 
 	// Static Variables
 	public static final String TABLE_NAME = "tbl_books";
