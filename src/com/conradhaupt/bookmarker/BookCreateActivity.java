@@ -1,411 +1,244 @@
 package com.conradhaupt.bookmarker;
 
-import java.util.List;
+import com.conradhaupt.bookmarker.ui.ActivityThemeSetter;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.os.AsyncTask;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.conradhaupt.bookmarker.sqlite.helper.BookDatabaseHelper;
-import com.conradhaupt.bookmarker.sqlite.model.Book;
-import com.conradhaupt.bookmarker.sqlite.model.Bookmark;
-
+/**
+ * A simple {@link FragmentActivity} subclass. Use the {@link #MODE} tag in the
+ * intent. Refer to {@link #BOOK_ID} for information on editing a book.
+ * 
+ */
 public class BookCreateActivity extends FragmentActivity {
 	/* Variables */
 	// Object Variables
-	private Book aBook = null;
-	private Bookmark aBookmark = null;
-	private int mode = -1;
+	/**
+	 * This is the mode of the activity. The possible values are
+	 * {@link #MODE_CREATE} to create an entry, {@link #MODE_EDIT} to edit a
+	 * current entry or {@link #MODE_VIEW} to view a current entry. If no value
+	 * is supplied in the {@link Intent} then {@link #MODE_VIEW} is assumed to
+	 * be the value.
+	 */
+	private int mode = MODE_VIEW;
 
-	// View Variables
-	public int aCurrentThemeResourceID = 0;
-	private Menu actionBarMenu = null;
-	private ProgressDialog aProgressDialog;
+	/**
+	 * This is the instance of {@link ActivityThemeSetter} that helps with
+	 * setting the activities theme based off of the apps global settings.
+	 */
+	public ActivityThemeSetter aActivityThemeSetter = new ActivityThemeSetter();
 
-	// Fragment Variables
-	private BookInformationFragment fBookInformationFragment;
-	private BookCreateInformationInterface fBookInformationInterface;
-	private BookBookmarksFragment fBookBookmarksFragment;
-	private BookCreateBookmarksInterface fBookBookmarksInterface;
+	/**
+	 * This is the book id to be used only if {@link #BOOK_ID} is defined in the
+	 * {@link Intent} and {@link #mode} is set to either {@link #MODE_EDIT} or
+	 * {@link #MODE_VIEW}. If the value is not changed from -1 then the activity
+	 * will treat {@link #mode} as if set to {@link #MODE_CREATE}.
+	 */
+	private long bookID = -1;
 
-	// Create Variables
-	private BookCreateFragmentInterface fBookCreateInformationInterface;
-	private BookCreateFragmentInterface fBookCreateBookmarksInterface;
+	/**
+	 * This is whether the current activity is doublePaned, and has both
+	 * fragments open at the same time, or is singlePaned, and so would have the
+	 * ViewPager active.
+	 */
+	private boolean isDoublePaned = false;
+
+	/**
+	 * This is the activitys instance of
+	 * {@link com.conradhaupt.bookmarker.BookInformationFragment}
+	 */
+	private BookInformationFragment aBookInformationFragment;
 
 	// Static Variables
-	public static String MODE = "com.conradhaupt.bookmarker.MODE";
-	public static String BOOK_ID = "com.conradhaupt.bookmarker.BOOK_ID";
-	public static int MODE_CREATE = 0;
-	public static int MODE_EDIT = 1;
-	public static int MODE_OTHER = 2;
-	public static final int CHANGE_ERROR = 0;
-	public static final int CHANGE_UNKNOWN = 1;
-	public static final int CHANGE_OK = -1;
+	/**
+	 * This is the activities tag for logs.
+	 */
+	public static final String TAG = "com.conradhaupt.bookmarker.BookCreateActivity.LOG";
+
+	/**
+	 * This is the tag to be used to supply the {@link #mode} in the
+	 * {@link Intent}
+	 */
+	public static final String MODE = "com.conradhaupt.bookmarker.BookCreateActivity.MODE";
+
+	/**
+	 * The constant value to define the activity as creating an entry. Used with
+	 * {@link #onCreate} with the tag {@link #mode} in the {@link Intent}.
+	 */
+	public static final int MODE_CREATE = 0;
+
+	/**
+	 * The constant value to define the activity as editing an entry. Used with
+	 * {@link #onCreate} with the tag {@link #MODE} in the {@link Intent}.
+	 */
+	public static final int MODE_EDIT = 1;
+
+	/**
+	 * The constant value to define the activity as viewing an entry. Used with
+	 * {@link #onCreate} with the tag {@link #MODE} in the {@link Intent}.
+	 */
+	public static final int MODE_VIEW = 2;
+
+	/**
+	 * This is the tag to be used to supply the {@link #bookID} in the
+	 * {@link Intent}. This will only be used IF {@link #mode} is set to
+	 * {@link #MODE_EDIT} and thus is to edit the entry. This will be ignored if
+	 * it is set to {@link #MODE_CREATE}.
+	 */
+	public static final String BOOK_ID = "com.conradhaupt.bookmarker.BookCreateActivity.BOOK_ID";
 
 	/* Methods */
-	public static BookCreateActivity newInstance(Book book, Bookmark bookmark) {
-		// Create and Initialize a new activity
-		BookCreateActivity bookCreateActivity = new BookCreateActivity();
-
-		// Assign values
-		bookCreateActivity.setValues(book == null ? null : book,
-				bookmark == null ? null : bookmark);
-
-		// Return final activity
-		return bookCreateActivity;
-	}
-
+	/**
+	 * This method is called when the activity is first created. It handles the
+	 * bundle assigned to it which should have a value with the tag
+	 * {@link #MODE}. Refer to {@link #mode} for more. If the activity has been
+	 * restarted, due to a configuration change etc..., then
+	 * {@link #handleSavedInstance} will be called to process the saved
+	 * information.<br>
+	 * <br>
+	 * Calls {@link #initPreCreate}, {@link #handleFragments}.<br>
+	 * Calls {@link #handleSavedInstance} only if the activity has been
+	 * restarted.
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		// Call super method
 		super.onCreate(savedInstanceState);
-		initPreCreate();
-		setContentView(R.layout.activity_book_create);
 
-		// Handle Home As Up
-		// getActionBar().setDisplayHomeAsUpEnabled(false);
-		// getActionBar().setHomeButtonEnabled(false);
+		// Initialize anything that needs to be created before the layout is
+		// inflated
+		this.initPreCreate();
+
+		// Inflate layout
+
+		// Check for doublePane and handle fragments
+		this.handleFragments();
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		System.out.println("OnCreateOptionsMenu Run");
-		// Inflate the menu, this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_book_create, menu);
-
-		// Store menu
-		this.actionBarMenu = menu;
-
-		// Process mode
-		processMode();
-
-		// Return true
-		return true;
-	}
-
-	@Override
-	protected void onStart() {
-		super.onStart();
-
-		// Handle bundle
-		handleBundle();
-
-		// Initialize Fragments
-		initFragments();
+		// TODO Auto-generated method stub
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle back button
-		if (item.getItemId() == android.R.id.home) {
-			this.finish();
-		}
-
-		// Handle fragment menus
-		if (fBookInformationFragment.onOptionsItemSelected(item)) {
-			return true;
-		} else if (fBookBookmarksFragment.onOptionsItemSelected(item)) {
-			return true;
-		}
-
-		// Handle activity menu items
-		switch (item.getItemId()) {
-		case R.id.activity_book_create_save:
-		case R.id.activity_book_create_create:
-			// Handle new book
-			int result = confirmChange();
-			switch (result) {
-			case CHANGE_UNKNOWN:
-				Toast.makeText(
-						this,
-						getResources().getString(
-								R.string.activity_book_create_error_unknown),
-						Toast.LENGTH_LONG).show();
-				break;
-			case CHANGE_ERROR:
-				Toast.makeText(
-						this,
-						getResources().getString(
-								R.string.activity_book_create_error),
-						Toast.LENGTH_LONG).show();
-				break;
-			case CHANGE_OK:
-
-				break;
-			default:
-				break;
-			}
-			break;
-		case R.id.activity_book_create_cancel:
-			this.finish();
-			break;
-		default:
-			// Do nothing
-		}
+		// TODO Auto-generated method stub
 		return super.onOptionsItemSelected(item);
 	}
 
-	protected void setValues(Book book, Bookmark bookmark) {
-		// Handle null values
-		if (book == null) {
-			System.out.println("Book is null");
-			aBook = new Book();
-		} else {
-			aBook = book;
-		}
-		if (bookmark == null) {
-			System.out.println("Bookmark is null");
-			aBookmark = new Bookmark();
-		} else {
-			aBookmark = bookmark;
-		}
-	}
-
-	private void handleBundle() {
-		// Handle mode
-		Bundle bundle = getIntent().getExtras();
-		if (bundle != null) {
-			this.mode = bundle.getInt(BookCreateActivity.MODE,
-					BookCreateActivity.MODE_OTHER);
-			if (bundle.getInt(BookCreateActivity.BOOK_ID, -1) != -1) {
-				System.out.println("Retrieving book");
-				// Get Book ID
-				int bookId = bundle.getInt(BookCreateActivity.BOOK_ID, -1);
-
-				// Initialize variables
-				BookDatabaseHelper bookDatabaseHelper = new BookDatabaseHelper(
-						getBaseContext());
-
-				// Get book
-				Book book = bookDatabaseHelper.getBook(bookId);
-
-				// Assign bookmarks
-				book.bookmarks = bookDatabaseHelper.getBookmarksForBook(bookId);
-
-				// Set values
-				setValues(book, book.bookmarks.get(0));
-			} else {
-				if (aBook == null || aBookmark == null) {
-					setValues(null, null);
-				}
-			}
-		}
-	}
-
-	private void processMode() {
-		System.out.println("ActionBarMenu is "
-				+ (actionBarMenu == null ? "NULL" : "NOT NULL"));
-		// Process mode
-		if (this.mode == BookCreateActivity.MODE_EDIT) {
-			// Display the save actionBar menu item
-			actionBarMenu.findItem(R.id.activity_book_create_save).setVisible(
-					true);
-			actionBarMenu.findItem(R.id.activity_book_create_cancel)
-					.setVisible(true);
-		} else if (this.mode == BookCreateActivity.MODE_CREATE) {
-			// Display the confirm actionBar menu item
-			actionBarMenu.findItem(R.id.activity_book_create_create)
-					.setVisible(true);
-		} else if (this.mode == BookCreateActivity.MODE_OTHER) {
-			// TODO No actions for MODE_OTHER yet, add in if needed later
-		} else {
-			// Handle no mode assigned
-			actionBarMenu.findItem(R.id.activity_book_create_create)
-					.setVisible(true);
-			actionBarMenu.findItem(R.id.activity_book_create_cancel)
-					.setVisible(true);
-		}
-	}
-
+	/**
+	 * Is called by {@link #onCreate} and calls {@link #handleBundle} and
+	 * {@link #handleTheme}
+	 */
 	private void initPreCreate() {
-		// Process theme preference
-		boolean inverse = PreferenceManager.getDefaultSharedPreferences(this)
-				.getBoolean("preference_theme_colour_inverse", false);
-		switch (Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(
-				this).getString("preference_theme_colour", "-100"))) {
-		case -100:
-			System.out.println("Theme preference not set, defaulting to Red");
-		case 0:
-			System.out.println("Setting theme as Blue");
-			aCurrentThemeResourceID = inverse ? R.style.AppTheme_Blue_Inverse
-					: R.style.AppTheme_Blue;
-			break;
-		case 1:
-			System.out.println("Setting theme as Red");
-			aCurrentThemeResourceID = inverse ? R.style.AppTheme_Red_Inverse
-					: R.style.AppTheme_Red;
-			break;
-		case 2:
-			System.out.println("Setting theme as Green");
-			aCurrentThemeResourceID = inverse ? R.style.AppTheme_Green_Inverse
-					: R.style.AppTheme_Green;
-			break;
-		default:
-			break;
-		}
+		// Handle bundle
+		this.handleBundle();
+
+		// Handle theme
+		this.handleTheme();
+	}
+
+	/**
+	 * This method is called by {@link #onCreate}. It process the activity's
+	 * theme and assigns it based off of the {@link SharedPreferences} for the
+	 * app. It uses the {@link #aActivityThemeSetter} variable to assign the
+	 * theme.
+	 */
+	private void handleTheme() {
 		// Assign theme
-		setTheme(aCurrentThemeResourceID);
+		aActivityThemeSetter.updateTheme(this);
 	}
 
-	private void updateFragmentValues() {
-		System.out.println("aBook is " + (aBook == null ? "NULL" : "NOT NULL"));
-		System.out.println("aBookmark is "
-				+ (aBookmark == null ? "NULL" : "NOT NULL"));
-		fBookInformationFragment.setValues(aBook == null ? new Book() : aBook);
-		fBookBookmarksFragment.setValues(aBookmark == null ? new Bookmark()
-				: aBookmark, aBook == null ? 10000 : aBook.getPageCount());
-	}
+	/**
+	 * This method is called by {@link #onCreate}. It processes the activities
+	 * intent to determine the layout and functionality. This method could
+	 * change the value of {@link #mode} depending on the intent given. It will
+	 * also change the value of {@link #mode} if no value is assigned to
+	 * {@link #BOOK_ID}.
+	 */
+	private void handleBundle() {
+		// Get the intent for the activity
+		Intent intent = getIntent();
 
-	private void initFragments() {
-		// Initialize fragments
-		fBookInformationFragment = BookInformationFragment.newInstance();
-		fBookBookmarksFragment = BookBookmarksFragment.newInstance();
+		// Retrieve values from intent
+		try {
+			mode = intent.getIntExtra(MODE, MODE_VIEW);
 
-		// Update Fragment Values
-		updateFragmentValues();
+			// Handle no bookID if MODE = MODE_EDIT or MODE_VIEW
+			if (mode == MODE_EDIT || mode == MODE_VIEW) {
+				bookID = intent.getLongExtra(BOOK_ID, bookID);
 
-		// Initialize interfaces
-		fBookBookmarksInterface = (BookCreateBookmarksInterface) fBookBookmarksFragment;
-		fBookInformationInterface = (BookCreateInformationInterface) fBookInformationFragment;
-		fBookCreateBookmarksInterface = fBookBookmarksFragment;
-		fBookCreateInformationInterface = fBookInformationFragment;
-
-		// Assign fragments to window
-		this.getFragmentManager()
-				.beginTransaction()
-				.add(R.id.activity_book_create_information_fragment,
-						fBookInformationFragment)
-				.add(R.id.activity_book_create_bookmarks_fragment,
-						fBookBookmarksFragment).commit();
-	}
-
-	public void bookChangeResult(int result) {
-		this.finish();
-	}
-
-	private int confirmChange() {
-		// Check if the fragments are ready to proceed
-		if (!(fBookCreateBookmarksInterface.canProceed() && fBookCreateInformationInterface
-				.canProceed())) {
-			System.out.println("Activity cannot Proceed");
-			return CHANGE_ERROR;
-		} else {
-			System.out.println("Activity can Proceed");
-		}
-
-		// Retrieve values from fragments
-		Book retrievedBook = fBookInformationInterface.getBook();
-		Bookmark retrievedBookmark = fBookBookmarksInterface.getBookmark();
-
-		// Handle null values
-		if (retrievedBook == null || retrievedBookmark == null) {
-			System.out.println("One of the retrieved values was null");
-			return CHANGE_UNKNOWN;
-		}
-
-		// Process null progress dialog
-		if (aProgressDialog == null) {
-			aProgressDialog = new ProgressDialog(this);
-		}
-
-		// Set progress dialog OnDismissDialog
-		aProgressDialog
-				.setOnDismissListener(new ProgressDialog.OnDismissListener() {
-
-					@Override
-					public void onDismiss(DialogInterface dialog) {
-						bookChangeResult(0);
-					}
-				});
-
-		// Display progress dialog
-		aProgressDialog.show();
-
-		// Update book and bookmark
-		aBook = fBookInformationInterface.getBook();
-		aBookmark = fBookBookmarksInterface.getBookmark();
-
-		new AsyncTask<Context, Integer, String>() {
-			/* Variables */
-			// Object Variables
-			private Context context;
-
-			/* Methods */
-			@Override
-			protected String doInBackground(Context... params) {
-				// Retrieve objects from array
-				context = params[0];
-
-				// Open up database helper
-				BookDatabaseHelper bookDatabaseHelper = new BookDatabaseHelper(
-						context);
-
-				// Create database
-
-				// Handle creating a new book
-				try {
-					if (aBook.getId() == -1) {
-						System.out.println("Inserting new book into database");
-						// Assign bookID to bookmark and create book
-						aBookmark.setBookId(bookDatabaseHelper
-								.createBook(aBook).getId());
-						// Create bookmark
-						System.out
-								.println("Inserting new bookmark into database");
-						bookDatabaseHelper.createBookmark(aBookmark);
-					} else if (aBook.getId() >= 0) {
-						// Update book and bookmark
-						System.out.println("Updating book");
-						bookDatabaseHelper.updateBook(aBook);
-						aProgressDialog.setProgress(50);
-						System.out.println("Updating bookmark");
-						bookDatabaseHelper.updateBookmark(aBookmark);
-						aProgressDialog.setProgress(100);
-					}
-					try {
-						aProgressDialog.setMax(5000);
-						double time = System.currentTimeMillis();
-						while ((System.currentTimeMillis() - time) < 5000) {
-							aProgressDialog.setProgress((int) (System
-									.currentTimeMillis() - time));
-						}
-					} catch (Exception e) {
-
-					}
-				} catch (Exception e) {
-					System.out.println(e);
+				// Handle no value given
+				if (bookID == -1) {
+					mode = MODE_CREATE;
+					Log.e(TAG,
+							"Mode was set to MODE_CREATE as no value was given for bookID");
+				} else {
+					Log.d(TAG, "Mode was set to "
+							+ (mode == MODE_VIEW ? "MODE_VIEW"
+									: (mode == MODE_EDIT ? "MODE_EDIT"
+											: "uh... nothing?"))
+							+ " and a bookID was set to " + bookID);
 				}
-
-				// Return final value
-				return null;
+			} else {
+				Log.d(TAG, "Mode was set to MODE_CREATE");
 			}
+		} catch (Exception e) {
+			Log.e(TAG, "Error during intent and bundle processing:\n" + e);
+		}
 
-			protected void onPostExecute(String result) {
-				aProgressDialog.dismiss();
+		// If the activity was rotated or the configuration changed then
+		// retrieve the previous values
+		// TODO add in code
+	}
+
+	/**
+	 * 
+	 */
+	private void handleFragments() {
+		// TODO Auto-generate method stub
+	}
+
+	/**
+	 * This is called by {@link #setMode} only if the mode value changed. The
+	 * contentView is changed here and all processes are altered to incorporate
+	 * the new functionality.
+	 */
+	private void onModeChanged() {
+		// TODO Auto-generated method stub
+	}
+
+	/**
+	 * Change the current mode of the activity. This will call
+	 * {@link #onModeChanged} if the mode has changed from its original value.
+	 * If the original value was {@link MODE_CREATE} then the mode cannot be
+	 * changed as the book has not been "created" yet.
+	 * 
+	 * @param mode
+	 *            Can be either {@link #MODE_VIEW}, {@link #MODE_CREATE} or
+	 *            {@link #MODE_EDIT}. If the value is neither of the three then
+	 *            {@link #MODE_VIEW} will be set.
+	 */
+	public void setMode(int mode) {
+		// Check if mode has changed
+		if (this.mode != mode && this.mode != MODE_CREATE) {
+			// Set new mode
+			if (mode == MODE_EDIT) {
+				Log.d(TAG, "Mode was set to MODE_EDIT");
+			} else if (mode == MODE_VIEW) {
+				Log.d(TAG, "Mode was set to MODE_VIEW");
 			}
-
-		}.execute(this);
-
-		// All went as planned, return true
-		return CHANGE_OK;
+			// Call onModeChanged
+			this.onModeChanged();
+		}
 	}
+	/* Classes and Interfaces */
 
-	/* Interface Methods. and Classes */
-	public interface BookCreateInformationInterface {
-		public abstract Book getBook();
-	}
-
-	public interface BookCreateBookmarksInterface {
-		public abstract Bookmark getBookmark();
-	}
-
-	public interface BookCreateFragmentInterface {
-		public abstract boolean canProceed();
-	}
 }

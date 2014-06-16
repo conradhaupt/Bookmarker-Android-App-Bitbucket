@@ -15,6 +15,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
+import com.conradhaupt.bookmarker.sqlite.helper.BookDatabaseHelper;
+import com.conradhaupt.bookmarker.ui.ActivityThemeSetter;
 import com.conradhaupt.bookmarker.ui.NavDrawerAdapter;
 
 public class MainActivity extends FragmentActivity implements
@@ -33,7 +35,7 @@ public class MainActivity extends FragmentActivity implements
 	// Value Variables
 	private String[] mDrawerTitles;
 	public String currentTitle = "";
-	public int aCurrentThemeResourceID = 0;
+	public ActivityThemeSetter aActivityThemeSetter = new ActivityThemeSetter();
 
 	// Fragment Variables
 	private SettingsFragment fSettingsFragment;
@@ -52,12 +54,14 @@ public class MainActivity extends FragmentActivity implements
 		// Process saved instance bundle
 		if (savedInstanceState != null
 				&& savedInstanceState.getBoolean("settingsFragment")) {
+			System.out.println("Activity is not new");
 			// Open Books then Settings Fragment
-			openBooksFragment(true);
+			openBooksFragment();
 			openSettingsFragment();
 		} else {
 			// Open Books Fragment, activity is new
-			openBooksFragment(true);
+			System.out.println("Activity is new");
+			openBooksFragment();
 		}
 	}
 
@@ -70,18 +74,13 @@ public class MainActivity extends FragmentActivity implements
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 
-		// try {
-		// outState.putBoolean(
-		// "settingsFragment",
-		// this.getFragmentManager()
-		// .getBackStackEntryAt(
-		// this.getFragmentManager()
-		// .getBackStackEntryCount() - 1)
-		// .getName().equals("fSettingsFragment") ? true
-		// : false);
-		// } catch (Exception e) {
-		// System.out.println(e);
-		// }
+		try {
+			outState.putBoolean("settingsFragment", this.getFragmentManager()
+					.findFragmentByTag("fSettingsFragment") != null ? true
+					: false);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 		super.onSaveInstanceState(outState);
 	}
 
@@ -101,6 +100,8 @@ public class MainActivity extends FragmentActivity implements
 		// Inflate the menu; this adds items to the action bar if it is present.
 		super.onCreateOptionsMenu(menu);
 		getMenuInflater().inflate(R.menu.activity_main, menu);
+		System.out.println(BookDatabaseHelper.CREATE_TABLE_BOOKMARKS);
+		System.out.println(BookDatabaseHelper.CREATE_TABLE_BOOKS);
 		return true;
 	}
 
@@ -131,7 +132,7 @@ public class MainActivity extends FragmentActivity implements
 		switch (position) {
 		case 0:
 			// Process books
-			openBooksFragment(false);
+			openBooksFragment();
 			mDrawerAdapter.setCurrentPosition(position);
 			mDrawerLayout.closeDrawers();
 			break;
@@ -149,33 +150,8 @@ public class MainActivity extends FragmentActivity implements
 	}
 
 	private void initPreCreate() {
-		// Process theme preference
-		boolean inverse = PreferenceManager.getDefaultSharedPreferences(this)
-				.getBoolean("preference_theme_colour_inverse", false);
-		switch (Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(
-				this).getString("preference_theme_colour", "-100"))) {
-		case -100:
-			System.out.println("Theme preference not set, defaulting to Red");
-		case 0:
-			System.out.println("Setting theme as Blue");
-			aCurrentThemeResourceID = inverse ? R.style.AppTheme_Blue_Inverse
-					: R.style.AppTheme_Blue;
-			break;
-		case 1:
-			System.out.println("Setting theme as Red");
-			aCurrentThemeResourceID = inverse ? R.style.AppTheme_Red_Inverse
-					: R.style.AppTheme_Red;
-			break;
-		case 2:
-			System.out.println("Setting theme as Green");
-			aCurrentThemeResourceID = inverse ? R.style.AppTheme_Green_Inverse
-					: R.style.AppTheme_Green;
-			break;
-		default:
-			break;
-		}
-		// Assign theme
-		setTheme(aCurrentThemeResourceID);
+		// Process theme change from preference
+		aActivityThemeSetter.updateTheme(this);
 	}
 
 	private void initViewVariables() {
@@ -186,9 +162,11 @@ public class MainActivity extends FragmentActivity implements
 
 		// Assign ActionBarDrawerToggle values
 		TypedArray a = getActionBar().getThemedContext()
-				.obtainStyledAttributes(aCurrentThemeResourceID,
+				.obtainStyledAttributes(
+						aActivityThemeSetter.getCurrentThemeResourceID(),
 						new int[] { R.attr.ic_navigation });
 		int attributeResourceId = a.getResourceId(0, 0);
+		a.recycle();
 
 		// Instantiate ActionBarToggle
 		mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
@@ -230,51 +208,44 @@ public class MainActivity extends FragmentActivity implements
 	}
 
 	private void openSettingsFragment() {
+
+		// If the fragment is null then instantiate
 		if (this.fSettingsFragment == null) {
 			this.fSettingsFragment = SettingsFragment.newInstance();
 		}
-		if (!(this
-				.getFragmentManager()
-				.getBackStackEntryAt(
-						this.getFragmentManager().getBackStackEntryCount() - 1)
-				.getName().equals("fSettingsFragment"))) {
-			System.out
-					.println("Current fragment was not SettingsFragment, transitioning");
+
+		// Pop or open the fragment
+		if (this.getFragmentManager().findFragmentByTag("fSettingsFragment") == null) {
+			System.out.println("fSettingsFragment has not been added, adding");
 			this.getFragmentManager()
 					.beginTransaction()
 					.replace(R.id.activity_frame, fSettingsFragment,
-							"SettingsFragment")
+							"fSettingsFragment")
 					.addToBackStack("fSettingsFragment").commit();
 		} else {
-			System.out
-					.println("Current fragment is SettingsFragment, leaving as is");
+			System.out.println("fSettingsFragment exists, popping");
+			this.getFragmentManager().popBackStack("fSettingsFragment", 0);
 		}
 	}
 
-	private void openBooksFragment(boolean force) {
+	private void openBooksFragment() {
 
+		// If the fragment is null then instantiate
 		if (this.fBooksFragment == null) {
 			this.fBooksFragment = BooksFragment.newInstance();
 		}
 
-		if (!force && this.getFragmentManager().getBackStackEntryCount() > 1) {
-			this.getFragmentManager().popBackStack();
-			System.out
-					.println("Current fragment was not BooksFragment, transitioning");
-			return;
-		}
-		if (force) {
-			System.out
-					.println("Current fragment was not BooksFragment, transitioning");
+		// Pop or open the fragment
+		if (this.getFragmentManager().findFragmentByTag("fBooksFragment") == null) {
+			System.out.println("fBooksFragment has not been added, adding");
 			this.getFragmentManager()
 					.beginTransaction()
 					.replace(R.id.activity_frame, fBooksFragment,
-							"BooksFragment").addToBackStack("fBooksFragment")
+							"fBooksFragment").addToBackStack("fBooksFragment")
 					.commit();
 		} else {
-			System.out
-					.println("Current fragment is BooksFragment, leaving as is");
+			System.out.println("fBooksFragment exists, popping");
+			this.getFragmentManager().popBackStack("fBooksFragment", 0);
 		}
 	}
-
 }

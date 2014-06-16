@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.conradhaupt.bookmarker.sqlite.model.Book;
 import com.conradhaupt.bookmarker.sqlite.model.Bookmark;
@@ -15,15 +16,22 @@ import com.conradhaupt.bookmarker.sqlite.model.Bookmark;
 public class BookDatabaseHelper extends SQLiteOpenHelper {
 
 	/* Variables */
+	// Debugging Variables
+	public static final String TAG = "BookmarkerDatabase";
+
 	// Database Syntax Constants
-	private static final String BRACKET_BEGIN = "(";
-	private static final String BRACKET_END = ")";
-	private static final String SPACE = " ";
-	private static final String TYPE_TEXT = "TEXT";
-	private static final String TYPE_INTEGER = "INTEGER";
-	private static final String TYPE_PRIMARY_KEY = "PRIMARY KEY";
-	private static final String CREATE_TABLE = "CREATE TABLE";
-	private static final String COMMA = ",";
+	public class DS {
+		public static final String BRACKET_BEGIN = "(";
+		public static final String BRACKET_END = ")";
+		public static final String SPACE = " ";
+		public static final String TYPE_TEXT = "TEXT";
+		public static final String TYPE_INTEGER = "INTEGER";
+		public static final String TYPE_PRIMARY_KEY = "PRIMARY KEY";
+		public static final String CREATE_TABLE = "CREATE TABLE";
+		public static final String COMMA = ",";
+		public static final String EQUALS = "=";
+		public static final String AND = "AND";
+	}
 
 	// Database Version
 	private static final int DATABASE_VERSION = 1;
@@ -32,25 +40,30 @@ public class BookDatabaseHelper extends SQLiteOpenHelper {
 	private static final String DATABASE_NAME = "booksManager";
 
 	// Create Queries
-	private static final String CREATE_TABLE_BOOKS = CREATE_TABLE + SPACE
-			+ Book.TABLE_NAME + SPACE + BRACKET_BEGIN + Book._ID + SPACE
-			+ TYPE_INTEGER + SPACE + TYPE_PRIMARY_KEY + COMMA
-			+ Book.COLUMN_ISBN + SPACE + TYPE_TEXT + COMMA + Book.COLUMN_TITLE
-			+ SPACE + TYPE_TEXT + COMMA + Book.COLUMN_AUTHOR + SPACE
-			+ TYPE_TEXT + COMMA + Book.COLUMN_PAGECOUNT + SPACE + TYPE_INTEGER
-			+ BRACKET_END;
-	private static final String CREATE_TABLE_BOOKMARKS = CREATE_TABLE + SPACE
-			+ Bookmark.TABLE_NAME + SPACE + BRACKET_BEGIN + Bookmark._ID
-			+ SPACE + TYPE_INTEGER + SPACE + TYPE_PRIMARY_KEY + COMMA
-			+ Bookmark.COLUMN_BOOK_ID + SPACE + TYPE_INTEGER + COMMA
-			+ Bookmark.COLUMN_TITLE + SPACE + TYPE_TEXT + COMMA
-			+ Bookmark.COLUMN_PAGE + SPACE + TYPE_INTEGER + COMMA
-			+ Bookmark.COLUMN_CHAPTER + SPACE + TYPE_INTEGER + COMMA
-			+ Bookmark.COLUMN_PARAGRAPH + SPACE + TYPE_INTEGER + COMMA
-			+ Bookmark.COLUMN_SENTENCE + SPACE + TYPE_INTEGER + BRACKET_END;
+	public static final String CREATE_TABLE_BOOKS = DS.CREATE_TABLE + DS.SPACE
+			+ Book.TABLE_NAME + DS.SPACE + DS.BRACKET_BEGIN + Book._ID
+			+ DS.SPACE + DS.TYPE_INTEGER + DS.SPACE + DS.TYPE_PRIMARY_KEY
+			+ DS.COMMA + Book.COLUMN_ISBN + DS.SPACE + DS.TYPE_TEXT + DS.COMMA
+			+ Book.COLUMN_TITLE + DS.SPACE + DS.TYPE_TEXT + DS.COMMA
+			+ Book.COLUMN_AUTHOR + DS.SPACE + DS.TYPE_TEXT + DS.COMMA
+			+ Book.COLUMN_PAGECOUNT + DS.SPACE + DS.TYPE_INTEGER + DS.COMMA
+			+ Book.COLUMN_MAINBOOKMARK + DS.SPACE + DS.TYPE_TEXT
+			+ DS.BRACKET_END;
+	public static final String CREATE_TABLE_BOOKMARKS = DS.CREATE_TABLE
+			+ DS.SPACE + Bookmark.TABLE_NAME + DS.SPACE + DS.BRACKET_BEGIN
+			+ Bookmark._ID + DS.SPACE + DS.TYPE_INTEGER + DS.SPACE
+			+ DS.TYPE_PRIMARY_KEY + DS.COMMA + Bookmark.COLUMN_BOOK_ID
+			+ DS.SPACE + DS.TYPE_INTEGER + DS.COMMA + Bookmark.COLUMN_TITLE
+			+ DS.SPACE + DS.TYPE_TEXT + DS.COMMA + Bookmark.COLUMN_NOTE
+			+ DS.SPACE + DS.TYPE_TEXT + DS.COMMA + Bookmark.COLUMN_PAGE
+			+ DS.SPACE + DS.TYPE_INTEGER + DS.COMMA + Bookmark.COLUMN_CHAPTER
+			+ DS.SPACE + DS.TYPE_INTEGER + DS.COMMA + Bookmark.COLUMN_PARAGRAPH
+			+ DS.SPACE + DS.TYPE_INTEGER + DS.COMMA + Bookmark.COLUMN_SENTENCE
+			+ DS.SPACE + DS.TYPE_INTEGER + DS.BRACKET_END;
 
 	public BookDatabaseHelper(Context context) {
-		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+		super(context, DATABASE_NAME , null,
+				DATABASE_VERSION);
 	}
 
 	@Override
@@ -62,6 +75,9 @@ public class BookDatabaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		// Log that the database is being uypgraded
+		Log.w(TAG, "Upgrading database from version " + oldVersion + " to "
+				+ newVersion + ", which will destroy all old data.");
 
 		// Drop all tables
 		db.execSQL("DROP TABLE IF EXISTS " + Book.TABLE_NAME);
@@ -158,6 +174,20 @@ public class BookDatabaseHelper extends SQLiteOpenHelper {
 		// Return list
 		return bookList;
 
+	}
+
+	public Cursor getAllBooksCursor() {
+		System.out.println("Running getAllBooksCursor");
+
+		// Get database
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		// Run query
+		Cursor cursor = db.query(Book.TABLE_NAME, null, null, null, null, null,
+				null);
+
+		// Return the cursor
+		return cursor;
 	}
 
 	public List<Book> getAllBooks() {
@@ -317,6 +347,21 @@ public class BookDatabaseHelper extends SQLiteOpenHelper {
 		return bookmarks;
 	}
 
+	public Cursor getAllBookmarksForBookCursor(long bookID) {
+		System.out.println("Running getBookmarksForBoo1kCursor");
+
+		// Get Database
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		// Run Query
+		Cursor cursor = db.query(Bookmark.TABLE_NAME, null, bookID == -1 ? null
+				: Bookmark.COLUMN_BOOK_ID + " = " + bookID, null, null, null,
+				null);
+
+		// Return cursor
+		return cursor;
+	}
+
 	public List<Bookmark> getAllBookmarks() {
 		return getBookmarksForBook(-1);
 	}
@@ -358,4 +403,5 @@ public class BookDatabaseHelper extends SQLiteOpenHelper {
 			db.close();
 		}
 	}
+
 }

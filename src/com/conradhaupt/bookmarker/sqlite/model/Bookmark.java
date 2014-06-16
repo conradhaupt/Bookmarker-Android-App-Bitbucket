@@ -1,13 +1,15 @@
 package com.conradhaupt.bookmarker.sqlite.model;
 
+import android.content.ContentValues;
 import android.provider.BaseColumns;
 
 public class Bookmark implements BaseColumns {
 	/* Variables */
 	// Object Variables
-	private long id;
+	private long id = -1;
 	private long bookId;
 	private String title;
+	private String note;
 	private int page = 0;
 	private int chapter = 0;
 	private int paragraph = 0;
@@ -17,6 +19,7 @@ public class Bookmark implements BaseColumns {
 	public static final String TABLE_NAME = "tbl_bookmarks";
 	public static final String COLUMN_BOOK_ID = "bookId";
 	public static final String COLUMN_TITLE = "title";
+	public static final String COLUMN_NOTE = "note";
 	public static final String COLUMN_PAGE = "page";
 	public static final String COLUMN_CHAPTER = "chapter";
 	public static final String COLUMN_PARAGRAPH = "paragraph";
@@ -24,6 +27,10 @@ public class Bookmark implements BaseColumns {
 
 	// Static Defaults
 	public static final Bookmark DEFAULT = new Bookmark();
+
+	// Content Provider Variables
+	public static final String BOOKMARK_TYPE = "vnd.android.cursor.dir/vnd.bookmarker.bookmark";
+	public static final String BOOKMARK_ITEM_TYPE = "vnd.android.cursor.item/vnd.bookmarker.bookmark";
 
 	/* Constructors */
 	public Bookmark() {
@@ -88,6 +95,21 @@ public class Bookmark implements BaseColumns {
 	}
 
 	/**
+	 * @return the note
+	 */
+	public String getNote() {
+		return note;
+	}
+
+	/**
+	 * @param note
+	 *            the note to set
+	 */
+	public void setNote(String note) {
+		this.note = note;
+	}
+
+	/**
 	 * @return the page
 	 */
 	public int getPage() {
@@ -145,5 +167,22 @@ public class Bookmark implements BaseColumns {
 	 */
 	public void setSentence(int sentence) {
 		this.sentence = sentence;
+	}
+
+	/**
+	 * @return The values inside the bookmark object in a ContentValues object
+	 */
+	public ContentValues getContentValues() {
+		ContentValues values = new ContentValues();
+		if (this.getId() != -1)
+			values.put(Bookmark._ID, this.getId());
+		values.put(Bookmark.COLUMN_BOOK_ID, this.getBookId());
+		values.put(Bookmark.COLUMN_TITLE, this.getTitle());
+		values.put(Bookmark.COLUMN_NOTE, this.getNote());
+		values.put(Bookmark.COLUMN_PAGE, this.getPage());
+		values.put(Bookmark.COLUMN_CHAPTER, this.getChapter());
+		values.put(Bookmark.COLUMN_PARAGRAPH, this.getParagraph());
+		values.put(Bookmark.COLUMN_SENTENCE, this.getSentence());
+		return values;
 	}
 }

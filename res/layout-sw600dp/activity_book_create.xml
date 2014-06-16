@@ -1,0 +1,21 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="horizontal"
+    tools:context=".BookCreateActivity" >
+
+    <FrameLayout
+        android:id="@+id/activity_book_create_fragment_main"
+        android:layout_height="match_parent"
+        android:layout_weight="@integer/activity_book_create_fragment_main_weight" >
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/activity_book_create_fragment_secondary"
+        android:layout_height="match_parent"
+        android:layout_weight="@integer/activity_book_create_fragment_secondary_weight" >
+    </FrameLayout>
+
+</LinearLayout>

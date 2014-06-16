@@ -1,18 +1,18 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
     tools:context=".BookInformationFragment" >
-    
 
-    
-    <include layout="@layout/creation_title" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@drawable/card_background_holo"
+        android:orientation="vertical" >
+    </LinearLayout>
 
-    <include layout="@layout/creation_author" />
-
-    <include layout="@layout/creation_isbn" />
-
-    <include layout="@layout/creation_page_count" />
-
-</LinearLayout>
+</ScrollView>

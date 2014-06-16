@@ -5,12 +5,12 @@
     <string name="app_name">Bookmarker</string>
 
     <!-- Activity Titles -->
-    <string name="fragment_main_title_drawer_closed">Books</string>
     <string name="activity_main_title_drawer_open">Menu</string>
+    <string name="fragment_main_title_drawer_closed">Books</string>
     <string name="fragment_settings_title_drawer_closed">Settings</string>
     <string name="activity_book_create_title">Add a book</string>
 
-    <!-- Specific Values -->
+    <!-- Fragment Values -->
     <string name="fragment_books_menu_add">Add</string>
     <string name="fragment_books_menu_add_code">Add via ISBN</string>
     <string name="fragment_books_menu_view_grid">View as grid</string>
@@ -19,6 +19,8 @@
     <string name="fragment_books_menu_sort_alphabetical">Alphabetical</string>
     <string name="fragment_books_menu_sort_date">Date</string>
     <string name="fragment_books_menu_sort_random">Random</string>
+
+    <!-- Dialog Values -->
     <string name="dialog_settings_about_close">Close</string>
 
     <!-- Preference Values -->
@@ -34,28 +36,7 @@
     <string name="preference_about_copyright">Conrad Haupt © 2014</string>
 
     <!-- Book Property Values -->
-    <string name="fragment_book_information_category">Book details</string>
-    <string name="fragment_book_information_title_hint">Title</string>
-    <string name="fragment_book_information_author_hint">Author</string>
-    <string name="fragment_book_information_isbn_error">ISBN is invalid</string>
-    <string name="fragment_book_information_isbn_error_char">Invalid input</string>
-    <string name="fragment_book_information_isbn_hint">ISBN</string>
-    <string name="fragment_book_information_page_count_hint">Pages</string>
-    <string name="fragment_book_information_page_count_error_zero">You can\'t have zero pages</string>
-    <string name="fragment_book_information_page_count_error_neg">You can\'t have negative pages</string>
-    <string name="fragment_book_information_page_count_error_none">You need to have pages in the book</string>
-    <string name="fragment_book_bookmarks_category">Bookmark</string>
-    <string name="fragment_book_bookmarks_page">Page</string>
-    <string name="fragment_book_bookmarks_chapter">Chapter</string>
-    <string name="fragment_book_bookmarks_paragraph">Paragraph</string>
-    <string name="fragment_book_bookmarks_sentence">Sentence</string>
-    <string name="activity_book_create_create">Create</string>
-    <string name="activity_book_create_save">Save</string>
-    <string name="activity_book_create_cancel">Cancel</string>
-    <string name="activity_book_create_error">Double check your values</string>
-    <string name="activity_book_create_error_unknown">An unknown error occurred</string>
-    <string name="activity_book_create_ok"></string>
     <string name="book_list_menu_edit">Edit</string>
-    <string name="book_list_menu_delete">Delete</string>    
+    <string name="book_list_menu_delete">Delete</string>
 
 </resources>

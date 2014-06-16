@@ -1,5 +1,7 @@
 package com.conradhaupt.bookmarker.backend;
 
+import com.conradhaupt.bookmarker.BooksFragment;
+
 public class ISBNChecker {
 	/*
 	 * This class checks for errors in ISBN numbers and returns a boolean
@@ -11,6 +13,9 @@ public class ISBNChecker {
 		boolean isIsbn10 = isISBN10(isbn);
 		boolean isIsbn13 = isISBN13(isbn);
 		if (isIsbn10 || isIsbn13) {
+			System.out.println("ISBN Number is "
+					+ (isIsbn10 ? "ISBN10" : "NOT ISBN10") + " and "
+					+ (isIsbn13 ? "ISBN13" : "NOT ISBN13"));
 			return true;
 		} else {
 			return false;
@@ -58,6 +63,8 @@ public class ISBNChecker {
 				// The check digit does not correspond, return false
 				return false;
 			}
+		} else {
+			return false;
 		}
 
 		// All conditions met, return true
@@ -65,6 +72,11 @@ public class ISBNChecker {
 	}
 
 	public static boolean isISBN10(String isbn) {
+		// Check the length, if not 10 then return false
+		if (isbn.length() != 10) {
+			return false;
+		}
+
 		// Compute sum of 9 digits
 		int checkDigitSum = 0;
 		for (int i = 10; i > 1; i--) {
@@ -72,12 +84,22 @@ public class ISBNChecker {
 		}
 
 		// Compare resultant check digit to actual
-		if ((11 - (checkDigitSum % 11)) != Integer
-				.parseInt(isbn.charAt(9) + "")) {
+		int checkDigit = (11 - (checkDigitSum % 11));
+		int actualCheckDigit;
+		try {
+			actualCheckDigit = Integer.parseInt(isbn.charAt(9) + "");
+		} catch (Exception e) {
+			if ((isbn.charAt(9) + "").equalsIgnoreCase("x")) {
+				// Check digit is 10;
+				actualCheckDigit = 10;
+			} else {
+				actualCheckDigit = -1;
+			}
+		}
+		if (checkDigit != actualCheckDigit) {
 			// Check digits do not correlate, return false
 			return false;
 		}
-
 		// All conditions met, return true
 		return true;
 	}

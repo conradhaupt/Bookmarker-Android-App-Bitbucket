@@ -28,6 +28,12 @@
             android:name="com.conradhaupt.bookmarker.BookCreateActivity"
             android:label="@string/activity_book_create_title" >
         </activity>
+
+        <provider
+            android:name="com.conradhaupt.bookmarker.backend.BookContentProvider"
+            android:authorities="com.conradhaupt.bookmarker.BookContentProvider"
+            android:enabled="true" >
+        </provider>
     </application>
 
 </manifest>

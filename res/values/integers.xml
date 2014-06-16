@@ -8,6 +8,8 @@
     <integer name="maxSentenceCount">10</integer>
 
     <!-- Activity and Fragment specific values -->
-    <integer name="fragment_books_grid_view_num_columns">2</integer>
+    <integer name="fragment_books_grid_view_num_columns">1</integer>
+    <integer name="activity_book_create_fragment_main_weight">1</integer>
+    <integer name="activity_book_create_fragment_secondary_weight">1</integer>
 
 </resources>

@@ -1,36 +1,8 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_book_create_fragment_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BookCreateActivity" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-        <include layout="@layout/creation_heading" />
-
-        <FrameLayout
-            android:id="@+id/activity_book_create_information_fragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:focusable="true" >
-        </FrameLayout>
-
-        <include
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            layout="@layout/creation_heading_bookmark" />
-
-        <FrameLayout
-            android:id="@+id/activity_book_create_bookmarks_fragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin" >
-        </FrameLayout>
-    </LinearLayout>
-
-</ScrollView>
+</FrameLayout>
